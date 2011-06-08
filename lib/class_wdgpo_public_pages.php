@@ -31,10 +31,11 @@ class Wdgpo_PublicPages {
 		}
 		echo '</script>';
 	}
+/*
 	function css_load_styles () {
 		wp_enqueue_style('wdgpo_voting_style', WDGPO_PLUGIN_URL . '/css/plusone.css');
 	}
-
+*/
 
 	function inject_plusone_buttons ($body) {
 		if (
@@ -54,7 +55,7 @@ class Wdgpo_PublicPages {
 
 	function add_hooks () {
 		add_action('wp_print_scripts', array($this, 'js_load_scripts'));
-		add_action('wp_print_styles', array($this, 'css_load_styles'));
+		//add_action('wp_print_styles', array($this, 'css_load_styles'));
 
 		// Automatic +1 buttons
 		if ('manual' != $this->data->get_option('position')) {
