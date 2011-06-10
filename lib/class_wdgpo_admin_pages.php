@@ -37,13 +37,13 @@ class Wdgpo_AdminPages {
 		$form = new Wdgpo_AdminFormRenderer;
 
 		register_setting('wdgpo', 'wdgpo');
-		add_settings_section('wdgpo_settings', 'Google +1 settings', create_function('', ''), 'wdgpo_options_page');
-		add_settings_field('wdgpo_appearance', 'Appearance', array($form, 'create_appearance_box'), 'wdgpo_options_page', 'wdgpo_settings');
-		add_settings_field('wdgpo_show_cout', 'Show +1s count', array($form, 'create_show_count_box'), 'wdgpo_options_page', 'wdgpo_settings');
-		add_settings_field('wdgpo_position', 'Google +1 box position', array($form, 'create_position_box'), 'wdgpo_options_page', 'wdgpo_settings');
-		add_settings_field('wdgpo_skip_post_types', 'Do <strong>NOT</strong> Google +1 box for these post types', array($form, 'create_skip_post_types_box'), 'wdgpo_options_page', 'wdgpo_settings');
-		add_settings_field('wdgpo_language', 'Language', array($form, 'create_language_box'), 'wdgpo_options_page', 'wdgpo_settings');
-		add_settings_field('wdgpo_front_page', 'Show +1 on Front Page', array($form, 'create_front_page_box'), 'wdgpo_options_page', 'wdgpo_settings');
+		add_settings_section('wdgpo_settings', __('Google +1 settings', 'wdgpo'), create_function('', ''), 'wdgpo_options_page');
+		add_settings_field('wdgpo_appearance', __('Appearance', 'wdgpo'), array($form, 'create_appearance_box'), 'wdgpo_options_page', 'wdgpo_settings');
+		add_settings_field('wdgpo_show_cout', __('Show +1s count', 'wdgpo'), array($form, 'create_show_count_box'), 'wdgpo_options_page', 'wdgpo_settings');
+		add_settings_field('wdgpo_position', __('Google +1 box position', 'wdgpo'), array($form, 'create_position_box'), 'wdgpo_options_page', 'wdgpo_settings');
+		add_settings_field('wdgpo_skip_post_types', __('Do <strong>NOT</strong> Google +1 box for these post types', 'wdgpo'), array($form, 'create_skip_post_types_box'), 'wdgpo_options_page', 'wdgpo_settings');
+		add_settings_field('wdgpo_language', __('Language', 'wdgpo'), array($form, 'create_language_box'), 'wdgpo_options_page', 'wdgpo_settings');
+		add_settings_field('wdgpo_front_page', __('Show +1 on Front Page', 'wdgpo'), array($form, 'create_front_page_box'), 'wdgpo_options_page', 'wdgpo_settings');
 	}
 
 	function create_blog_admin_menu_entry () {

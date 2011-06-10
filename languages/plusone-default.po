@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Google +1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-02 15:20+0100\n"
-"PO-Revision-Date: 2011-06-02 15:21+0100\n"
+"POT-Creation-Date: 2011-06-10 11:21+0100\n"
+"PO-Revision-Date: 2011-06-10 11:21+0100\n"
 "Last-Translator: \n"
 "Language-Team: Incsub\n"
 "MIME-Version: 1.0\n"
@@ -67,6 +67,35 @@ msgstr ""
 msgid "<p>Google +1 will <strong><em>not</em></strong> be shown for selected types.</p>"
 msgstr ""
 
+#: lib/class_wdgpo_admin_pages.php:40
+#: lib/forms/plugin_settings.php:2
+msgid "Google +1 settings"
+msgstr ""
+
+#: lib/class_wdgpo_admin_pages.php:41
+msgid "Appearance"
+msgstr ""
+
+#: lib/class_wdgpo_admin_pages.php:42
+msgid "Show +1s count"
+msgstr ""
+
+#: lib/class_wdgpo_admin_pages.php:43
+msgid "Google +1 box position"
+msgstr ""
+
+#: lib/class_wdgpo_admin_pages.php:44
+msgid "Do <strong>NOT</strong> Google +1 box for these post types"
+msgstr ""
+
+#: lib/class_wdgpo_admin_pages.php:45
+msgid "Language"
+msgstr ""
+
+#: lib/class_wdgpo_admin_pages.php:46
+msgid "Show +1 on Front Page"
+msgstr ""
+
 #: lib/class_wpgpo_widget.php:8
 msgid "Shows \"Google +1\" box on your post pages"
 msgstr ""
@@ -81,5 +110,9 @@ msgstr ""
 
 #: lib/class_wpgpo_widget.php:44
 msgid "Show count:"
+msgstr ""
+
+#: lib/forms/plugin_settings.php:17
+msgid "<h2>Shortcode</h2>  <p>In addition to (or instead of) the auto-inserted Google +1 buttons, you may want to use the shortcode to embed the button in your posts.</p>  <dl>  <dt>Tag: <code>wdgpo_plusone</code></dt>  <dd>Embeds Google +1 button in your post</dd>  <dd>  Arguments:  <ul>  <li>  <code>appearance</code> (<em>optional</em>) - Accepts one of these values: <code>small</code>, <code>medium</code>, <code>standard</code>, <code>tall</code>. Default values are set on plugin settings page.  </li>  <li>  <code>show_count</code> (<em>optional</em>) - Accepts <code>yes</code> or <code>no</code> as values. Default values are set on plugin settings page.  </li>  </ul>  </dd>  <dd>  Examples:  <ul>  <li>  <code>[wdgpo_plusone]</code> - Embeds Google +1 button in your post, with defaults set on plugin settings page.  </li>  <li>  <code>[wdgpo_plusone appearance=\"tall\"]</code> - Embeds Google +1 <em>tall</em> button in your post, with other options taken from plugin settings.  </li>  <li>  <code>[wdgpo_plusone show_count=\"no\"]</code> - Embeds Google +1 button without count in your post, with other options taken from plugin settings.  </li>  </ul>  </dd> </dl>    <h2>Styling</h2>  <p>If you need some extra styling done (e.g. floating the button), the button is wrapped in a <code>DIV</code> with class <code>wdgpo</code>.</p>  <p>Based on the rendered button appearance and count, additional classes will be set:</p>  <ul>  <li><code>wdgpo_small_count</code></li>  <li><code>wdgpo_small_nocount</code></li>  <li><code>wdgpo_medium_count</code></li>  <li><code>wdgpo_medium_nocount</code></li>  <li><code>wdgpo_standard_count</code></li>  <li><code>wdgpo_standard_nocount</code></li>  <li><code>wdgpo_tall_count</code></li>  <li><code>wdgpo_tall_nocount</code></li> </ul>"
 msgstr ""
 
