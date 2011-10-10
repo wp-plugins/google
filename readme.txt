@@ -2,8 +2,8 @@
 Contributors: WPMUDEV, VeBailovity
 Tags: Google+1, Google, plusone, buddypress plugin, wpmu, buddypress, multisite
 Requires at least: 3.1
-Tested up to: 3.2
-Stable tag: 1.0.4
+Tested up to: 3.1.3
+Stable tag: 1.0.5
 
 Adds the Google +1 button to your site so your visitors can vote to tell the world how great your site is! 
 
@@ -37,10 +37,7 @@ All you need to do is install and activate the plugin.  It's ready to go right a
 *  You can find <a href='http://premium.wpmudev.org/project/google-1/installation/'>in-depth setup and usage instructions with screenshots here &raquo;</a> 
 
 == Screenshots ==
-1. There is a settings page so you can display your Google +1 button however you want it.
-2. We have shortcodes so you can insert it wherever you want it
-3. We have additional styling settings
-4. And, what WordPress plugin would be without a widget?
+
 
 
 

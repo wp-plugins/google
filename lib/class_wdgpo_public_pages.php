@@ -25,7 +25,7 @@ class Wdgpo_PublicPages {
 
 	function js_load_scripts () {
 		$lang = $this->data->get_option('language');
-		echo '<script type="text/javascript" src="http://apis.google.com/js/plusone.js">';
+		echo '<script type="text/javascript" src="https://apis.google.com/js/plusone.js">';
 		if ($lang) {
 			echo '{lang: "' . $lang . '"}';
 		}
@@ -59,7 +59,8 @@ class Wdgpo_PublicPages {
 
 		// Automatic +1 buttons
 		if ('manual' != $this->data->get_option('position')) {
-			add_filter('the_content', array($this, 'inject_plusone_buttons'), 1); // Do this VERY early in content processing
+			//add_filter('the_content', array($this, 'inject_plusone_buttons'), 1); // Do this VERY early in content processing
+			add_filter('the_content', array($this, 'inject_plusone_buttons'), 10);
 		}
 
 		$this->codec->register();

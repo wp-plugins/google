@@ -3,7 +3,7 @@
 Plugin Name: Google +1
 Plugin URI: http://premium.wpmudev.org/project/google-1
 Description: Adds the Google +1 button to your site.
-Version: 1.0.4
+Version: 1.0.5
 Author: Ve Bailovity (Incsub)
 Author URI: http://premium.wpmudev.org
 WDP ID: 234
