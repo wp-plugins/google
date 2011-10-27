@@ -25,24 +25,11 @@ class Wdgpo_PublicPages {
 
 	function js_load_scripts () {
 		$lang = $this->data->get_option('language');
-		/*
 		echo '<script type="text/javascript" src="https://apis.google.com/js/plusone.js">';
 		if ($lang) {
 			echo '{lang: "' . $lang . '"}';
 		}
 		echo '</script>';
-		*/
-		echo <<<EOGoogleJs
-<script type="text/javascript">
-  window.___gcfg = {lang: '{$lang}'};
-
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>
-EOGoogleJs;
 	}
 /*
 	function css_load_styles () {
