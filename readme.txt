@@ -3,7 +3,7 @@ Contributors: WPMUDEV, VeBailovity
 Tags: Google+1, Google, plusone, buddypress plugin, wpmu, buddypress, multisite
 Requires at least: 3.1
 Tested up to: 3.1.3
-Stable tag: 1.0.5
+Stable tag: 1.1
 
 Adds the Google +1 button to your site so your visitors can vote to tell the world how great your site is! 
 
