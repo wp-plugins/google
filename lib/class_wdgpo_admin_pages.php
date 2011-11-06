@@ -44,6 +44,11 @@ class Wdgpo_AdminPages {
 		add_settings_field('wdgpo_skip_post_types', __('Do <strong>NOT</strong> Google +1 box for these post types', 'wdgpo'), array($form, 'create_skip_post_types_box'), 'wdgpo_options_page', 'wdgpo_settings');
 		add_settings_field('wdgpo_language', __('Language', 'wdgpo'), array($form, 'create_language_box'), 'wdgpo_options_page', 'wdgpo_settings');
 		add_settings_field('wdgpo_front_page', __('Show +1 on Front Page', 'wdgpo'), array($form, 'create_front_page_box'), 'wdgpo_options_page', 'wdgpo_settings');
+		add_settings_field('wdgpo_footer_render', __('Add scripts to my footer', 'wdgpo'), array($form, 'create_footer_render_box'), 'wdgpo_options_page', 'wdgpo_settings');
+
+		add_settings_section('wdgpo_analytics', __('Google Analytics integration', 'wdgpo'), create_function('', ''), 'wdgpo_options_page');
+		add_settings_field('wdgpo_analytics_enable', __('Enable Google Analytics integration', 'wdgpo'), array($form, 'create_enable_analytics_box'), 'wdgpo_options_page', 'wdgpo_analytics');
+		add_settings_field('wdgpo_analytics_category', __('Analytics category', 'wdgpo'), array($form, 'create_analytics_category_box'), 'wdgpo_options_page', 'wdgpo_analytics');
 	}
 
 	function create_blog_admin_menu_entry () {
@@ -63,6 +68,7 @@ class Wdgpo_AdminPages {
 			add_action('admin_menu', array($this, 'create_blog_admin_menu_entry'));
 		}
 
-
+		// Register the shortcodes, so Membership picks them up
+		$rpl = new Wdgpo_Codec; $rpl->register();
 	}
 }

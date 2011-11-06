@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Google +1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-10 11:21+0100\n"
-"PO-Revision-Date: 2011-06-10 11:21+0100\n"
+"POT-Creation-Date: 2011-11-06 16:18+0100\n"
+"PO-Revision-Date: 2011-11-06 16:18+0100\n"
 "Last-Translator: \n"
 "Language-Team: Incsub\n"
 "MIME-Version: 1.0\n"
@@ -67,6 +67,26 @@ msgstr ""
 msgid "<p>Google +1 will <strong><em>not</em></strong> be shown for selected types.</p>"
 msgstr ""
 
+#: lib/class_wdgpo_admin_form_renderer.php:146
+msgid "Using the WordPress defaults, the needed scripts will be added to your <code>head</code>. Use this option to load the scripts in your footer, after the bulk of your page has lareadt been loaded."
+msgstr ""
+
+#: lib/class_wdgpo_admin_form_renderer.php:147
+msgid "Note that this method is a bit less reliable then the default one, as it depends on your theme doing the right thing."
+msgstr ""
+
+#: lib/class_wdgpo_admin_form_renderer.php:152
+msgid "Enabling this option will allow you to track your +1s in Google Analytics."
+msgstr ""
+
+#: lib/class_wdgpo_admin_form_renderer.php:153
+msgid "<b>Note:</b> your site will need to have Google Analytics already set up for this to work."
+msgstr ""
+
+#: lib/class_wdgpo_admin_form_renderer.php:161
+msgid "Your +1 clicks will be added to this category."
+msgstr ""
+
 #: lib/class_wdgpo_admin_pages.php:40
 #: lib/forms/plugin_settings.php:2
 msgid "Google +1 settings"
@@ -94,6 +114,22 @@ msgstr ""
 
 #: lib/class_wdgpo_admin_pages.php:46
 msgid "Show +1 on Front Page"
+msgstr ""
+
+#: lib/class_wdgpo_admin_pages.php:47
+msgid "Add scripts to my footer"
+msgstr ""
+
+#: lib/class_wdgpo_admin_pages.php:49
+msgid "Google Analytics integration"
+msgstr ""
+
+#: lib/class_wdgpo_admin_pages.php:50
+msgid "Enable Google Analytics integration"
+msgstr ""
+
+#: lib/class_wdgpo_admin_pages.php:51
+msgid "Analytics category"
 msgstr ""
 
 #: lib/class_wpgpo_widget.php:8

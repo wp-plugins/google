@@ -42,7 +42,9 @@ class Wdgpo_Codec {
 		$count = $show_count ? 'true' : 'false';
 		$count_class = ('true' == $count) ? 'count' : 'nocount';
 
-		$ret = "<div class='wdgpo wdgpo_{$size}_{$count_class}'><g:plusone size='{$size}' count='{$count}' href='{$url}'></g:plusone></div>";
+		$callback = $this->data->get_option('analytics_integration') ? "callback='wdgpo_plusone_click'" : '';
+
+		$ret = "<div class='wdgpo wdgpo_{$size}_{$count_class}'><g:plusone size='{$size}' count='{$count}' href='{$url}' {$callback}></g:plusone></div>";
 		return $ret;
 	}
 

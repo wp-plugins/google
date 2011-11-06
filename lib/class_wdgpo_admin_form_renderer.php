@@ -141,4 +141,24 @@ class Wdgpo_AdminFormRenderer {
 		);
 	}
 
+	function create_footer_render_box () {
+		echo $this->_create_checkbox('footer_render');
+		echo '<div><small>' . __('Using the WordPress defaults, the needed scripts will be added to your <code>head</code>. Use this option to load the scripts in your footer, after the bulk of your page has lareadt been loaded.', 'wdgpo') . '</small></div>';
+		echo '<div><small>' . __('Note that this method is a bit less reliable then the default one, as it depends on your theme doing the right thing.', 'wdgpo') . '</small></div>';
+	}
+
+	function create_enable_analytics_box () {
+		echo $this->_create_checkbox('analytics_integration');
+		echo '<div><small>' . __('Enabling this option will allow you to track your +1s in Google Analytics.', 'wdgpo') . '</small></div>';
+		echo '<div><small>' . __('<b>Note:</b> your site will need to have Google Analytics already set up for this to work.', 'wdgpo') . '</small></div>';
+	}
+
+	function create_analytics_category_box () {
+		$opt = $this->_get_option();
+		$category = @$opt['analytics_category'] ? $opt['analytics_category'] : 'Google +1';
+		$category = esc_attr($category);
+		echo "<input type='text' name='wdgpo[analytics_category]' class='widefat' value='{$category}' />";
+		echo '<div><small>' . __('Your +1 clicks will be added to this category.', 'wdgpo') . '</small></div>';
+	}
+
 }

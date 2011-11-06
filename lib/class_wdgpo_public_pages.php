@@ -30,12 +30,20 @@ class Wdgpo_PublicPages {
 			echo '{lang: "' . $lang . '"}';
 		}
 		echo '</script>';
+
+		if (!$this->data->get_option('analytics_integration')) return;
+		$category = $this->data->get_option('analytics_category');
+		$category = $category ? esc_js($category) : 'Google +1';
+		echo <<<EOGaq
+<script type="text/javascript">
+function wdgpo_plusone_click (el) {
+	if (typeof window._gaq != "undefined") {
+		 _gaq.push(['_trackEvent', '{$category}', el.state, document.title]);
 	}
-/*
-	function css_load_styles () {
-		wp_enqueue_style('wdgpo_voting_style', WDGPO_PLUGIN_URL . '/css/plusone.css');
+}
+</script>
+EOGaq;
 	}
-*/
 
 	function inject_plusone_buttons ($body) {
 		if (
@@ -54,8 +62,8 @@ class Wdgpo_PublicPages {
 	}
 
 	function add_hooks () {
-		add_action('wp_print_scripts', array($this, 'js_load_scripts'));
-		//add_action('wp_print_styles', array($this, 'css_load_styles'));
+		$action = $this->data->get_option('footer_render') ? 'wp_footer' : 'wp_print_scripts';
+		add_action($action, array($this, 'js_load_scripts'));
 
 		// Automatic +1 buttons
 		if ('manual' != $this->data->get_option('position')) {
