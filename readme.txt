@@ -1,19 +1,24 @@
 === The Google +1 plugin ===
-Contributors: WPMUDEV, VeBailovity
-Tags: Google+1, Google, plusone, buddypress plugin, wpmu, buddypress, multisite
+Contributors: WPMUDEV, vebailovity
+Tags: Google+1, Google, plusone, buddypress plugin, wpmu, buddypress, multisite, Google+ pages, Google Analytics
 Requires at least: 3.1
 Tested up to: 3.1.3
-Stable tag: 1.1
+Stable tag: 1.2
 
-Adds the Google +1 button to your site so your visitors can vote to tell the world how great your site is! 
+Integrate with Google+ Pages and add the Google +1 button to your site so your visitors can vote to tell the world how great your site is! 
 
 == Description ==
  
-The Google +1 button lets your readers tell the World "you should check this out" while helping your site with search engine rankings for Google.
+The Google +1 button lets your readers tell the world "you should check this out" while helping your site with search engine rankings for Google.
 
 Our Google +1 Plugin lets your visitors quickly and easily add their Google+1 vote to your posts or site.
 
 All you need to do is install and activate the plugin.  It's ready to go right away!  
+
+= New Features! =
+
+* Integrate with Google+ Pages
+* Use Google Analytics to track your +1s
 
 = Some Google + Plugin Features: =
 
@@ -36,11 +41,6 @@ All you need to do is install and activate the plugin.  It's ready to go right a
 = To Set Up And Configure Google +1 =
 *  You can find <a href='http://premium.wpmudev.org/project/google-1/installation/'>in-depth setup and usage instructions with screenshots here &raquo;</a> 
 
-== Screenshots ==
-
-
-
-
 == Frequently Asked Questions ==
 
 = Do I need to be a paid WPMU DEV member? =
@@ -55,3 +55,19 @@ No.  This plugins is offered as is at no charge.
 
 = 1.0 =
 Initial Lite version.
+
+= 1.0.2 =
+- Fix for CSS inclusion.
+- Updated l10n strings and language file.
+
+= 1.0.3 =
+Changed Google javascript protocol to https.
+
+= 1.0.5 =
+Fixed conflict with single-line media autoembeds
+
+= 1.1 =
+Google Analytics integration
+
+= 1.2 =
+Google+ Pages integration

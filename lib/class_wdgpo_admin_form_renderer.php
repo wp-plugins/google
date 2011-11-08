@@ -147,6 +147,13 @@ class Wdgpo_AdminFormRenderer {
 		echo '<div><small>' . __('Note that this method is a bit less reliable then the default one, as it depends on your theme doing the right thing.', 'wdgpo') . '</small></div>';
 	}
 
+	function create_gplus_page_id_box () {
+		$opt = $this->_get_option();
+		$page_id = esc_attr(@$opt['gplus_page_id']);
+		echo "<input type='text' name='wdgpo[gplus_page_id]' class='widefat' value='{$page_id}' />";
+		echo '<div><small>' . __('Your Google+ page ID is the long number at the end of your page URL.', 'wdgpo') . '</small></div>';
+	}
+
 	function create_enable_analytics_box () {
 		echo $this->_create_checkbox('analytics_integration');
 		echo '<div><small>' . __('Enabling this option will allow you to track your +1s in Google Analytics.', 'wdgpo') . '</small></div>';

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Google +1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-06 16:18+0100\n"
-"PO-Revision-Date: 2011-11-06 16:18+0100\n"
+"POT-Creation-Date: 2011-11-08 17:25+0100\n"
+"PO-Revision-Date: 2011-11-08 17:25+0100\n"
 "Last-Translator: \n"
 "Language-Team: Incsub\n"
 "MIME-Version: 1.0\n"
@@ -75,15 +75,19 @@ msgstr ""
 msgid "Note that this method is a bit less reliable then the default one, as it depends on your theme doing the right thing."
 msgstr ""
 
-#: lib/class_wdgpo_admin_form_renderer.php:152
+#: lib/class_wdgpo_admin_form_renderer.php:154
+msgid "Your Google+ page ID is the long number at the end of your page URL."
+msgstr ""
+
+#: lib/class_wdgpo_admin_form_renderer.php:159
 msgid "Enabling this option will allow you to track your +1s in Google Analytics."
 msgstr ""
 
-#: lib/class_wdgpo_admin_form_renderer.php:153
+#: lib/class_wdgpo_admin_form_renderer.php:160
 msgid "<b>Note:</b> your site will need to have Google Analytics already set up for this to work."
 msgstr ""
 
-#: lib/class_wdgpo_admin_form_renderer.php:161
+#: lib/class_wdgpo_admin_form_renderer.php:168
 msgid "Your +1 clicks will be added to this category."
 msgstr ""
 
@@ -121,23 +125,88 @@ msgid "Add scripts to my footer"
 msgstr ""
 
 #: lib/class_wdgpo_admin_pages.php:49
-msgid "Google Analytics integration"
+msgid "Google+ Pages integration"
 msgstr ""
 
 #: lib/class_wdgpo_admin_pages.php:50
+msgid "My Google+ page ID"
+msgstr ""
+
+#: lib/class_wdgpo_admin_pages.php:52
+msgid "Google Analytics integration"
+msgstr ""
+
+#: lib/class_wdgpo_admin_pages.php:53
 msgid "Enable Google Analytics integration"
 msgstr ""
 
-#: lib/class_wdgpo_admin_pages.php:51
+#: lib/class_wdgpo_admin_pages.php:54
 msgid "Analytics category"
+msgstr ""
+
+#: lib/class_wpgpo_gplus_page_widget.php:8
+msgid "Shows your Google+ Page"
+msgstr ""
+
+#: lib/class_wpgpo_gplus_page_widget.php:24
+#, php-format
+msgid "Small icon: %s"
+msgstr ""
+
+#: lib/class_wpgpo_gplus_page_widget.php:28
+#, php-format
+msgid "Medium icon: %s"
+msgstr ""
+
+#: lib/class_wpgpo_gplus_page_widget.php:32
+#, php-format
+msgid "Large icon: %s"
+msgstr ""
+
+#: lib/class_wpgpo_gplus_page_widget.php:38
+msgid "None"
+msgstr ""
+
+#: lib/class_wpgpo_gplus_page_widget.php:39
+msgid "Left"
+msgstr ""
+
+#: lib/class_wpgpo_gplus_page_widget.php:40
+msgid "Right"
+msgstr ""
+
+#: lib/class_wpgpo_gplus_page_widget.php:43
+msgid "before"
+msgstr ""
+
+#: lib/class_wpgpo_gplus_page_widget.php:44
+msgid "after"
+msgstr ""
+
+#: lib/class_wpgpo_gplus_page_widget.php:48
+#: lib/class_wpgpo_widget.php:30
+msgid "Title:"
+msgstr ""
+
+#: lib/class_wpgpo_gplus_page_widget.php:55
+msgid "If you'd like to add your Google+ badge, you need to set up your Google+ page ID in plugin settings."
+msgstr ""
+
+#: lib/class_wpgpo_gplus_page_widget.php:72
+msgid "Badge float"
+msgstr ""
+
+#: lib/class_wpgpo_gplus_page_widget.php:81
+msgid "My text"
+msgstr ""
+
+#: lib/class_wpgpo_gplus_page_widget.php:92
+#, php-format
+msgid "My text will come %s my badge."
 msgstr ""
 
 #: lib/class_wpgpo_widget.php:8
 msgid "Shows \"Google +1\" box on your post pages"
-msgstr ""
-
-#: lib/class_wpgpo_widget.php:30
-msgid "Title:"
 msgstr ""
 
 #: lib/class_wpgpo_widget.php:35

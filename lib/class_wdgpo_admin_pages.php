@@ -30,7 +30,7 @@ class Wdgpo_AdminPages {
 			$goback = add_query_arg('settings-updated', 'true',  wp_get_referer());
 			wp_redirect($goback);
 		}
-		add_submenu_page('settings.php', 'Google +1', 'Google +1', 'manage_network_options', 'wdgpo', array($this, 'create_admin_page'));
+		add_submenu_page('settings.php', 'Google+', 'Google+', 'manage_network_options', 'wdgpo', array($this, 'create_admin_page'));
 	}
 
 	function register_settings () {
@@ -46,13 +46,16 @@ class Wdgpo_AdminPages {
 		add_settings_field('wdgpo_front_page', __('Show +1 on Front Page', 'wdgpo'), array($form, 'create_front_page_box'), 'wdgpo_options_page', 'wdgpo_settings');
 		add_settings_field('wdgpo_footer_render', __('Add scripts to my footer', 'wdgpo'), array($form, 'create_footer_render_box'), 'wdgpo_options_page', 'wdgpo_settings');
 
+		add_settings_section('wdgpo_gplus_pages', __('Google+ Pages integration', 'wdgpo'), create_function('', ''), 'wdgpo_options_page');
+		add_settings_field('wdgpo_gplus_page_id', __('My Google+ page ID', 'wdgpo'), array($form, 'create_gplus_page_id_box'), 'wdgpo_options_page', 'wdgpo_gplus_pages');
+
 		add_settings_section('wdgpo_analytics', __('Google Analytics integration', 'wdgpo'), create_function('', ''), 'wdgpo_options_page');
 		add_settings_field('wdgpo_analytics_enable', __('Enable Google Analytics integration', 'wdgpo'), array($form, 'create_enable_analytics_box'), 'wdgpo_options_page', 'wdgpo_analytics');
 		add_settings_field('wdgpo_analytics_category', __('Analytics category', 'wdgpo'), array($form, 'create_analytics_category_box'), 'wdgpo_options_page', 'wdgpo_analytics');
 	}
 
 	function create_blog_admin_menu_entry () {
-		add_options_page('Google +1', 'Google +1', 'manage_options', 'wdgpo', array($this, 'create_admin_page'));
+		add_options_page('Google+', 'Google+', 'manage_options', 'wdgpo', array($this, 'create_admin_page'));
 	}
 
 	function create_admin_page () {

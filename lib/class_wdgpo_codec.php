@@ -6,6 +6,7 @@ class Wdgpo_Codec {
 
 	var $shortcodes = array(
 		'plusone' => 'wdgpo_plusone',
+		'gplus_page' => 'wdgpo_gplus_page',
 	);
 
 	var $data;
@@ -45,6 +46,36 @@ class Wdgpo_Codec {
 		$callback = $this->data->get_option('analytics_integration') ? "callback='wdgpo_plusone_click'" : '';
 
 		$ret = "<div class='wdgpo wdgpo_{$size}_{$count_class}'><g:plusone size='{$size}' count='{$count}' href='{$url}' {$callback}></g:plusone></div>";
+		return $ret;
+	}
+
+	function process_gplus_page_code ($args) {
+		$args = shortcode_atts(array(
+			'appearance' => false,
+			'float' => false,
+		), $args);
+		$appearance = $args['appearance'] ? $args['appearance'] : 'medium_icon';
+		$float = in_array($args['float'], array('left', 'right')) ? "style='float:{$args['float']};'" : '';
+
+		$data = new Wdgpo_Options;
+		$page_id = $data->get_option('gplus_page_id');
+		if (!$page_id) return '';
+
+		$tpl = '<a href="https://plus.google.com/%s/?prsrc=3" style="text-decoration: none;"><img src="https://ssl.gstatic.com/images/icons/gplus-%d.png" width="%d" height="%d" style="border: 0;"></img></a>';
+		$tpl = "<div class='wdgpo wdgpo_gplus_page wdgpo_gplus_page_{$appearance}' {$float}>{$tpl}</div>";
+		$ret = '';
+		switch ($appearance) {
+			case "small_icon":
+				$ret = sprintf($tpl, $page_id, 16, 16, 16);
+				break;
+			case "medium_icon":
+				$ret = sprintf($tpl, $page_id, 32, 32, 32);
+				break;
+			case "large_icon":
+				$ret = sprintf($tpl, $page_id, 64, 64, 64);
+				break;
+		}
+
 		return $ret;
 	}
 

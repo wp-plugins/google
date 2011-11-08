@@ -1,9 +1,10 @@
 <?php
 /*
-Plugin Name: Google +1
+Plugin Name: Google+ Plugin
 Plugin URI: http://premium.wpmudev.org/project/google-1
-Description: Adds the Google +1 button to your site.
-Version: 1.1
+Description: Integrate with Google+ Pages and add the Google +1 button to your site so your visitors can vote to tell the world how great your site is!
+Version: 1.2
+Text Domain: wdgpo
 Author: Ve Bailovity (Incsub)
 Author URI: http://premium.wpmudev.org
 WDP ID: 234
@@ -45,7 +46,7 @@ if (is_multisite() && defined('WPMU_PLUGIN_URL') && defined('WPMU_PLUGIN_DIR') &
 } else {
 	// No textdomain is loaded because we can't determine the plugin location.
 	// No point in trying to add textdomain to string and/or localizing it.
-	wp_die(__('There was an issue determining where Post Voting plugin is installed. Please reinstall.'));
+	wp_die(__('There was an issue determining where Google+ plugin is installed. Please reinstall.'));
 }
 $textdomain_handler('wdgpo', false, WDGPO_PLUGIN_SELF_DIRNAME . '/languages/');
 
@@ -58,9 +59,12 @@ require_once WDGPO_PLUGIN_BASE_DIR . '/lib/class_wdgpo_codec.php';
 
 Wdgpo_Options::populate();
 
-// Widget
+// Widgets
 require_once WDGPO_PLUGIN_BASE_DIR . '/lib/class_wpgpo_widget.php';
 add_action('widgets_init', create_function('', "register_widget('Wdgpo_WidgetPlusone');"));
+
+require_once WDGPO_PLUGIN_BASE_DIR . '/lib/class_wpgpo_gplus_page_widget.php';
+add_action('widgets_init', create_function('', "register_widget('Wdgpo_Gplus_WidgetPage');"));
 
 
 if (is_admin()) {

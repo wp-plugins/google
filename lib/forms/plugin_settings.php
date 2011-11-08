@@ -1,5 +1,5 @@
 <div class="wrap">
-	<h2><?php _e('Google +1 settings', 'wdgpo');?></h2>
+	<h2><?php _e('Google+ settings', 'wdgpo');?></h2>
 
 <?php if (WP_NETWORK_ADMIN) { ?>
 	<form action="settings.php" method="post">

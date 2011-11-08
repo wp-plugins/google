@@ -61,6 +61,12 @@ EOGaq;
 		return $body;
 	}
 
+	function inject_gplus_page_id () {
+		$page_id = $this->data->get_option('gplus_page_id');
+		if (!$page_id) return false;
+		echo '<link href="https://plus.google.com/' . $page_id . '/" rel="publisher" />';
+	}
+
 	function add_hooks () {
 		$action = $this->data->get_option('footer_render') ? 'wp_footer' : 'wp_print_scripts';
 		add_action($action, array($this, 'js_load_scripts'));
@@ -69,6 +75,11 @@ EOGaq;
 		if ('manual' != $this->data->get_option('position')) {
 			//add_filter('the_content', array($this, 'inject_plusone_buttons'), 1); // Do this VERY early in content processing
 			add_filter('the_content', array($this, 'inject_plusone_buttons'), 10);
+		}
+
+		// Google+ Page
+		if ($this->data->get_option('gplus_page_id')) {
+			add_action('wp_head', array($this, 'inject_gplus_page_id'));
 		}
 
 		$this->codec->register();
