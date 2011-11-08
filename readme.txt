@@ -1,17 +1,17 @@
-=== The Google +1 plugin ===
-Contributors: WPMUDEV, vebailovity
+=== The Google+ plugin ===
+Contributors: WPMUDEV, VeBailovity
 Tags: Google+1, Google, plusone, buddypress plugin, wpmu, buddypress, multisite, Google+ pages, Google Analytics
 Requires at least: 3.1
-Tested up to: 3.1.3
+Tested up to: 3.2
 Stable tag: 1.2
 
 Integrate with Google+ Pages and add the Google +1 button to your site so your visitors can vote to tell the world how great your site is! 
 
 == Description ==
  
-The Google +1 button lets your readers tell the world "you should check this out" while helping your site with search engine rankings for Google.
+The Google +1 button lets your readers tell the world "you should check this out" while helping your site with search engine rankings for Google. The Google + Plugin lets your visitors quickly and easily add their Google+1 vote to your posts or site.
 
-Our Google +1 Plugin lets your visitors quickly and easily add their Google+1 vote to your posts or site.
+Google+ Pages gives your business the opportunity to have it's own Google + Page. This plugin will help you integrate your Google+ Page with your WordPress website.
 
 All you need to do is install and activate the plugin.  It's ready to go right away!  
 
@@ -29,6 +29,8 @@ All you need to do is install and activate the plugin.  It's ready to go right a
 * Show/hide Google +1 counts
 * Customize position of the button
 * Shortcodes and styling for further customization
+* Track your +1s with Analytics integration
+* Integrate your Google+ Page with WordPress
 
 == Installation ==
 = To Install: =
