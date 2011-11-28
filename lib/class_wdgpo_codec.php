@@ -7,6 +7,7 @@ class Wdgpo_Codec {
 	var $shortcodes = array(
 		'plusone' => 'wdgpo_plusone',
 		'gplus_page' => 'wdgpo_gplus_page',
+		'gplus_activities' => 'wdgpo_activities',
 	);
 
 	var $data;
@@ -26,6 +27,65 @@ class Wdgpo_Codec {
 		if (!is_array($skip_types)) return true; // No restrictions, we're good
 
 		return (!in_array($type, $skip_types));
+	}
+
+	function process_gplus_activities_code ($args, $content='') {
+		$args = shortcode_atts(array(
+			'ids' => false,
+			'show_faces' => false,
+			'template' => false,
+			'orderby' => false,
+			'order' => false,
+			'limit' => false,
+			'buffering' => false,
+		), $args);
+
+		$ids = array();
+		if ($args['ids']) {
+			$tmp = explode(',', $args['ids']);
+			foreach($tmp as $id) {
+				if (!trim($id)) continue;
+				$ids[] = trim($id);
+			}
+		}
+		$limit = $args['limit'] ? (int)$args['limit'] : -1;
+		$orderby = $args['orderby'] ? $args['orderby'] : 'date';
+		$order = $args['order'] ? $args['order'] : 'DESC';
+
+		$meta_query = array();
+		foreach ($ids as $id) {
+			$meta_query[] = array(
+				'key' => 'wdgpo_gplus_feed_id',
+				'value' => $id,
+			);
+		}
+		if (count($ids) > 1) $meta_query['relation'] = 'OR';
+		$qargs = array(
+			'post_type' => array('post', 'wdgpo_imported_post'),
+			'posts_per_page=' => $limit,
+			'orderby' => $orderby,
+			'order' => $order,
+		);
+		if ($meta_query) $qargs['meta_query'] = $meta_query;
+		else $qargs['meta_key'] = 'wdgpo_gplus_feed_id';
+
+		$query = new WP_Query($qargs);
+		$activities = $query->posts;
+
+		$ret = '';
+		if ($args['buffering']) {
+			ob_start();
+			if (!$args['template']) get_template_part('wdgpo-activities', $args['template']);
+			else include(WDGPO_PLUGIN_BASE_DIR . '/lib/forms/activities.php');
+			$ret = ob_get_contents();
+			ob_end_clean();
+			return "{$content} {$ret}";
+		} else {
+			echo apply_filters('the_content', $content);
+			if ($args['template']) get_template_part('wdgpo-activities', $args['template']);
+			else include(WDGPO_PLUGIN_BASE_DIR . '/lib/forms/activities.php');
+			return $ret;
+		}
 	}
 
 	function process_plusone_code ($args) {

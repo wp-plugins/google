@@ -46,8 +46,15 @@ class Wdgpo_AdminPages {
 		add_settings_field('wdgpo_front_page', __('Show +1 on Front Page', 'wdgpo'), array($form, 'create_front_page_box'), 'wdgpo_options_page', 'wdgpo_settings');
 		add_settings_field('wdgpo_footer_render', __('Add scripts to my footer', 'wdgpo'), array($form, 'create_footer_render_box'), 'wdgpo_options_page', 'wdgpo_settings');
 
-		add_settings_section('wdgpo_gplus_pages', __('Google+ Pages integration', 'wdgpo'), create_function('', ''), 'wdgpo_options_page');
+		add_settings_section('wdgpo_gplus_pages', __('Google+ Pages and Profiles', 'wdgpo'), create_function('', ''), 'wdgpo_options_page');
 		add_settings_field('wdgpo_gplus_page_id', __('My Google+ page ID', 'wdgpo'), array($form, 'create_gplus_page_id_box'), 'wdgpo_options_page', 'wdgpo_gplus_pages');
+		add_settings_field('wdgpo_gplus_profile_id', __('My Google+ profile ID', 'wdgpo'), array($form, 'create_gplus_profile_id_box'), 'wdgpo_options_page', 'wdgpo_gplus_pages');
+
+		add_settings_section('wdgpo_gplus_import', __('Google+ activities import', 'wdgpo'), array($form, 'create_import_check_box'), 'wdgpo_options_page');
+		if (function_exists('curl_init')) {
+			add_settings_field('wdgpo_gplus_settings', __('My Google+ App settings', 'wdgpo'), array($form, 'create_gplus_app_settings_box'), 'wdgpo_options_page', 'wdgpo_gplus_import');
+			add_settings_field('wdgpo_gplus_import', __('Import settings', 'wdgpo'), array($form, 'create_gplus_import_settings_box'), 'wdgpo_options_page', 'wdgpo_gplus_import');
+		}
 
 		add_settings_section('wdgpo_analytics', __('Google Analytics integration', 'wdgpo'), create_function('', ''), 'wdgpo_options_page');
 		add_settings_field('wdgpo_analytics_enable', __('Enable Google Analytics integration', 'wdgpo'), array($form, 'create_enable_analytics_box'), 'wdgpo_options_page', 'wdgpo_analytics');
@@ -62,6 +69,47 @@ class Wdgpo_AdminPages {
 		include(WDGPO_PLUGIN_BASE_DIR . '/lib/forms/plugin_settings.php');
 	}
 
+	function js_print_scripts () {
+		if (!isset($_GET['page']) || 'wdgpo' != $_GET['page']) return false;
+		wp_enqueue_script('wdgpo_admin', WDGPO_PLUGIN_URL . '/js/wdgpo-admin.js', array('jquery'));
+	}
+
+	function json_gplus_deauthenticate () {
+		if (!function_exists('curl_init')) return false;
+		$auth = Wdgpo_GoogleAuth::get_instance();
+		$auth->reset_token();
+		die;
+	}
+
+	function json_gplus_test_import () {
+		if (!function_exists('curl_init')) return false;
+		$auth = Wdgpo_GoogleAuth::get_instance();
+		$data = $auth->get_gplus_data(true);
+		$results = array();
+		foreach ($data as $feed) {
+			$results[] = array(
+				"status" => (@$feed['title'] ? 1 : 0),
+				"title" => @$feed['title'],
+			);
+		}
+		header('Content-type: application/json');
+		echo json_encode(array(
+			"results" => $results,
+		));
+		die;
+	}
+
+	function json_gplus_import_now () {
+		if (!function_exists('curl_init')) return false;
+		$google = Wdgpo_GoogleAuth::get_instance();
+		$data = $google->import_gplus_data();
+		header('Content-type: application/json');
+		echo json_encode(array(
+			"results" => $data,
+		));
+		die;
+	}
+
 	function add_hooks () {
 		// Step0: Register options and menu
 		add_action('admin_init', array($this, 'register_settings'));
@@ -71,7 +119,14 @@ class Wdgpo_AdminPages {
 			add_action('admin_menu', array($this, 'create_blog_admin_menu_entry'));
 		}
 
+		add_action('admin_print_scripts', array($this, 'js_print_scripts'));
+
 		// Register the shortcodes, so Membership picks them up
 		$rpl = new Wdgpo_Codec; $rpl->register();
+
+		// AJAX handlers
+		add_action('wp_ajax_wdgpo_gplus_deauthenticate', array($this, 'json_gplus_deauthenticate'));
+		add_action('wp_ajax_wdgpo_gplus_test_import', array($this, 'json_gplus_test_import'));
+		add_action('wp_ajax_wdgpo_gplus_import_now', array($this, 'json_gplus_import_now'));
 	}
 }

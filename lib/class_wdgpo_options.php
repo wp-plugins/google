@@ -6,9 +6,9 @@ class Wdgpo_Options {
 	/**
 	 * Gets a single option from options storage.
 	 */
-	function get_option ($key) {
+	function get_option ($key=false) {
 		$opts = get_option('wdgpo');
-		return @$opts[$key];
+		return $key ? @$opts[$key] : $opts;
 	}
 
 	/**
@@ -16,6 +16,17 @@ class Wdgpo_Options {
 	 */
 	function set_options ($opts) {
 		return WP_NETWORK_ADMIN ? update_site_option('wdgpo', $opts) : update_option('wdgpo', $opts);
+	}
+
+	function set_token ($token) {
+		return WP_NETWORK_ADMIN ? update_site_option('wdgpo_token', $token) : update_option('wdgpo_token', $token);
+	}
+
+	function get_token () {
+		$blog_token = get_option('wdgpo_token');
+		if (!is_multisite()) return $blog_token;
+		if ($blog_token) return $blog_token;
+		return get_site_option('wdgpo_token');
 	}
 
 	/**

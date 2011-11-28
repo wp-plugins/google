@@ -3,9 +3,9 @@
 Plugin Name: Google+ Plugin
 Plugin URI: http://premium.wpmudev.org/project/google-1
 Description: Integrate with Google+ Pages and add the Google +1 button to your site so your visitors can vote to tell the world how great your site is!
-Version: 1.2
+Version: 1.3
 Text Domain: wdgpo
-Author: Ve Bailovity (Incsub)
+Author: Ve Bailovity (Incsub), raggedrobins (Incsub)
 Author URI: http://premium.wpmudev.org
 WDP ID: 234
 
@@ -56,8 +56,12 @@ Wdgpo_Installer::check();
 
 require_once WDGPO_PLUGIN_BASE_DIR . '/lib/class_wdgpo_options.php';
 require_once WDGPO_PLUGIN_BASE_DIR . '/lib/class_wdgpo_codec.php';
-
 Wdgpo_Options::populate();
+
+require_once WDGPO_PLUGIN_BASE_DIR . '/lib/class_wdgpo_google_auth.php';
+Wdgpo_GoogleAuth::init();
+
+require_once WDGPO_PLUGIN_BASE_DIR . '/lib/class_wdgpo_scheduled_importer.php';
 
 // Widgets
 require_once WDGPO_PLUGIN_BASE_DIR . '/lib/class_wpgpo_widget.php';
@@ -65,6 +69,9 @@ add_action('widgets_init', create_function('', "register_widget('Wdgpo_WidgetPlu
 
 require_once WDGPO_PLUGIN_BASE_DIR . '/lib/class_wpgpo_gplus_page_widget.php';
 add_action('widgets_init', create_function('', "register_widget('Wdgpo_Gplus_WidgetPage');"));
+
+require_once WDGPO_PLUGIN_BASE_DIR . '/lib/class_wpgpo_gplus_activities_widget.php';
+add_action('widgets_init', create_function('', "register_widget('Wdgpo_Gplus_WidgetActivities');"));
 
 
 if (is_admin()) {
