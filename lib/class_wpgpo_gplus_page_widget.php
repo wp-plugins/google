@@ -103,7 +103,7 @@ class Wdgpo_Gplus_WidgetPage extends WP_Widget {
 
 		$html .= '<p>';
 		$html .= '<label for="' . $this->get_field_id('posts_limit') . '">' . __('Show this many imported posts:', 'wdgpo') . '</label> ';
-		$html .= '<select name="' . $this->get_field_id('posts_name') . '" id="' . $this->get_field_id('posts_limit') . '">';
+		$html .= '<select name="' . $this->get_field_name('posts_limit') . '" id="' . $this->get_field_id('posts_limit') . '">';
 		for ($i=1; $i<21; $i++) {
 			$selected = ($i == $posts_limit) ? 'selected="selected"' : '';
 			$html .= "<option value='{$i}' {$selected}>{$i}</option>";
@@ -181,7 +181,7 @@ class Wdgpo_Gplus_WidgetPage extends WP_Widget {
 			'post_type' => array('post', 'wdgpo_imported_post'),
 			'meta_key' => 'wdgpo_gplus_feed_id',
 			'meta_value' => $feed_id,
-			'posts_per_page=' . (int)$limit,
+			'posts_per_page' => (int)$limit,
 		));
 		echo "<ul class='wdgpo_gplus_posts'>";
 		foreach ($query->posts as $post) {

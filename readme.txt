@@ -66,6 +66,9 @@ No.  This plugins is offered as is at no charge.
 
 == Changelog ==
 
+= 1.3.1 =
+Fix for limit attributes in widgets.
+
 = 1.3 =
 - Added Post Format support
 - Added BuddyPress support

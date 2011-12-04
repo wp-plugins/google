@@ -11,9 +11,8 @@ class Wdgpo_Gplus_WidgetActivities extends WP_Widget {
 
 	function form($instance) {
 		$title = esc_attr($instance['title']);
-		$feed_id = $instance['feed_id'];
-		$posts_limit = $instance['posts_limit'];
-
+		$feed_id = @$instance['feed_id'];
+		$posts_limit = @$instance['posts_limit'];
 
 		// Set defaults
 		// ...
@@ -41,7 +40,7 @@ class Wdgpo_Gplus_WidgetActivities extends WP_Widget {
 
 		$html .= '<p>';
 		$html .= '<label for="' . $this->get_field_id('posts_limit') . '">' . __('Show this many imported posts:', 'wdgpo') . '</label> ';
-		$html .= '<select name="' . $this->get_field_id('posts_name') . '" id="' . $this->get_field_id('posts_limit') . '">';
+		$html .= '<select name="' . $this->get_field_name('posts_limit') . '" id="' . $this->get_field_id('posts_limit') . '">';
 		for ($i=1; $i<21; $i++) {
 			$selected = ($i == $posts_limit) ? 'selected="selected"' : '';
 			$html .= "<option value='{$i}' {$selected}>{$i}</option>";
@@ -56,7 +55,7 @@ class Wdgpo_Gplus_WidgetActivities extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags($new_instance['title']);
 		$instance['feed_id'] = strip_tags($new_instance['feed_id']);
-		$instance['posts_limit'] = strip_tags($new_instance['posts_limit']);
+		$instance['posts_limit'] = (int)$new_instance['posts_limit'];
 
 		return $instance;
 	}
@@ -81,7 +80,7 @@ class Wdgpo_Gplus_WidgetActivities extends WP_Widget {
 			'post_type' => array('post', 'wdgpo_imported_post'),
 			'meta_key' => 'wdgpo_gplus_feed_id',
 			'meta_value' => $feed_id,
-			'posts_per_page=' . (int)$limit,
+			'posts_per_page' => (int)$limit,
 		));
 		echo "<ul class='wdgpo_gplus_posts'>";
 		foreach ($query->posts as $post) {
