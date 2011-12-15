@@ -29,6 +29,7 @@ class Wdgpo_AdminPages {
 			}
 			$goback = add_query_arg('settings-updated', 'true',  wp_get_referer());
 			wp_redirect($goback);
+			die;
 		}
 		add_submenu_page('settings.php', 'Google+', 'Google+', 'manage_network_options', 'wdgpo', array($this, 'create_admin_page'));
 	}

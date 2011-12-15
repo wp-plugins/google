@@ -3,7 +3,7 @@
 Plugin Name: Google+ Plugin
 Plugin URI: http://premium.wpmudev.org/project/google-1
 Description: Integrate with Google+ Pages and add the Google +1 button to your site so your visitors can vote to tell the world how great your site is!
-Version: 1.3.1
+Version: 1.3.2
 Text Domain: wdgpo
 Author: Ve Bailovity (Incsub), raggedrobins (Incsub)
 Author URI: http://premium.wpmudev.org
@@ -31,17 +31,17 @@ define ('WDGPO_PLUGIN_SELF_DIRNAME', basename(dirname(__FILE__)), true);
 if (is_multisite() && defined('WPMU_PLUGIN_URL') && defined('WPMU_PLUGIN_DIR') && file_exists(WPMU_PLUGIN_DIR . '/' . basename(__FILE__))) {
 	define ('WDGPO_PLUGIN_LOCATION', 'mu-plugins', true);
 	define ('WDGPO_PLUGIN_BASE_DIR', WPMU_PLUGIN_DIR, true);
-	define ('WDGPO_PLUGIN_URL', WPMU_PLUGIN_URL, true);
+	define ('WDGPO_PLUGIN_URL', str_replace('http://', (@$_SERVER["HTTPS"] == 'on' ? 'https://' : 'http://'), WPMU_PLUGIN_URL), true);
 	$textdomain_handler = 'load_muplugin_textdomain';
 } else if (defined('WP_PLUGIN_URL') && defined('WP_PLUGIN_DIR') && file_exists(WP_PLUGIN_DIR . '/' . WDGPO_PLUGIN_SELF_DIRNAME . '/' . basename(__FILE__))) {
 	define ('WDGPO_PLUGIN_LOCATION', 'subfolder-plugins', true);
 	define ('WDGPO_PLUGIN_BASE_DIR', WP_PLUGIN_DIR . '/' . WDGPO_PLUGIN_SELF_DIRNAME, true);
-	define ('WDGPO_PLUGIN_URL', WP_PLUGIN_URL . '/' . WDGPO_PLUGIN_SELF_DIRNAME, true);
+	define ('WDGPO_PLUGIN_URL', str_replace('http://', (@$_SERVER["HTTPS"] == 'on' ? 'https://' : 'http://'), WP_PLUGIN_URL) . '/' . WDGPO_PLUGIN_SELF_DIRNAME, true);
 	$textdomain_handler = 'load_plugin_textdomain';
 } else if (defined('WP_PLUGIN_URL') && defined('WP_PLUGIN_DIR') && file_exists(WP_PLUGIN_DIR . '/' . basename(__FILE__))) {
 	define ('WDGPO_PLUGIN_LOCATION', 'plugins', true);
 	define ('WDGPO_PLUGIN_BASE_DIR', WP_PLUGIN_DIR, true);
-	define ('WDGPO_PLUGIN_URL', WP_PLUGIN_URL, true);
+	define ('WDGPO_PLUGIN_URL', str_replace('http://', (@$_SERVER["HTTPS"] == 'on' ? 'https://' : 'http://'), WP_PLUGIN_URL), true);
 	$textdomain_handler = 'load_plugin_textdomain';
 } else {
 	// No textdomain is loaded because we can't determine the plugin location.
