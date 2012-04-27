@@ -37,8 +37,9 @@ require_once 'service/apiServiceRequest.php';
      * @param string $blogId The ID of the blog to get.
      * @return Blog
      */
-    public function get($blogId) {
+    public function get($blogId, $optParams = array()) {
       $params = array('blogId' => $blogId);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('get', array($params));
       if ($this->useObjects()) {
         return new Blog($data);
@@ -88,8 +89,9 @@ require_once 'service/apiServiceRequest.php';
      * @param string $postId The ID of the post
      * @return Post
      */
-    public function get($blogId, $postId) {
+    public function get($blogId, $postId, $optParams = array()) {
       $params = array('blogId' => $blogId, 'postId' => $postId);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('get', array($params));
       if ($this->useObjects()) {
         return new Post($data);
@@ -136,8 +138,9 @@ require_once 'service/apiServiceRequest.php';
      * @param string $pageId The ID of the page to get.
      * @return Page
      */
-    public function get($blogId, $pageId) {
+    public function get($blogId, $pageId, $optParams = array()) {
       $params = array('blogId' => $blogId, 'pageId' => $pageId);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('get', array($params));
       if ($this->useObjects()) {
         return new Page($data);
@@ -189,8 +192,9 @@ require_once 'service/apiServiceRequest.php';
      * @param string $commentId The ID of the comment to get.
      * @return Comment
      */
-    public function get($blogId, $postId, $commentId) {
+    public function get($blogId, $postId, $commentId, $optParams = array()) {
       $params = array('blogId' => $blogId, 'postId' => $postId, 'commentId' => $commentId);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('get', array($params));
       if ($this->useObjects()) {
         return new Comment($data);
@@ -217,8 +221,9 @@ require_once 'service/apiServiceRequest.php';
      * @param string $userId The ID of the user to get.
      * @return User
      */
-    public function get($userId) {
+    public function get($userId, $optParams = array()) {
       $params = array('userId' => $userId);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('get', array($params));
       if ($this->useObjects()) {
         return new User($data);
@@ -246,8 +251,9 @@ require_once 'service/apiServiceRequest.php';
      * @param string $userId ID of the user whose blogs are to be fetched.
      * @return BlogList
      */
-    public function listUsersBlogs($userId) {
+    public function listUsersBlogs($userId, $optParams = array()) {
       $params = array('userId' => $userId);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('list', array($params));
       if ($this->useObjects()) {
         return new BlogList($data);
@@ -279,6 +285,7 @@ class apiBloggerService extends apiService {
   public $pages;
   public $comments;
   public $users;
+  public $users_blogs;
   /**
    * Constructs the internal representation of the Blogger service.
    *
@@ -289,14 +296,14 @@ class apiBloggerService extends apiService {
     $this->restBasePath = '/blogger/v2/';
     $this->version = 'v2';
     $this->serviceName = 'blogger';
-    $this->io = $apiClient->getIo();
 
     $apiClient->addService($this->serviceName, $this->version);
     $this->blogs = new BlogsServiceResource($this, $this->serviceName, 'blogs', json_decode('{"methods": {"get": {"scopes": ["https://www.googleapis.com/auth/blogger"], "parameters": {"blogId": {"required": true, "type": "string", "location": "path"}}, "id": "blogger.blogs.get", "httpMethod": "GET", "path": "blogs/{blogId}", "response": {"$ref": "Blog"}}}}', true));
     $this->posts = new PostsServiceResource($this, $this->serviceName, 'posts', json_decode('{"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/blogger"], "parameters": {"pageToken": {"type": "string", "location": "query"}, "fetchBodies": {"type": "boolean", "location": "query"}, "blogId": {"required": true, "type": "string", "location": "path"}, "maxResults": {"format": "uint32", "type": "integer", "location": "query"}, "startDate": {"type": "string", "location": "query"}}, "id": "blogger.posts.list", "httpMethod": "GET", "path": "blogs/{blogId}/posts", "response": {"$ref": "PostList"}}, "get": {"scopes": ["https://www.googleapis.com/auth/blogger"], "parameters": {"postId": {"required": true, "type": "string", "location": "path"}, "blogId": {"required": true, "type": "string", "location": "path"}}, "id": "blogger.posts.get", "httpMethod": "GET", "path": "blogs/{blogId}/posts/{postId}", "response": {"$ref": "Post"}}}}', true));
     $this->pages = new PagesServiceResource($this, $this->serviceName, 'pages', json_decode('{"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/blogger"], "parameters": {"fetchBodies": {"type": "boolean", "location": "query"}, "blogId": {"required": true, "type": "string", "location": "path"}}, "id": "blogger.pages.list", "httpMethod": "GET", "path": "blogs/{blogId}/pages", "response": {"$ref": "PageList"}}, "get": {"scopes": ["https://www.googleapis.com/auth/blogger"], "parameters": {"pageId": {"required": true, "type": "string", "location": "path"}, "blogId": {"required": true, "type": "string", "location": "path"}}, "id": "blogger.pages.get", "httpMethod": "GET", "path": "blogs/{blogId}/pages/{pageId}", "response": {"$ref": "Page"}}}}', true));
     $this->comments = new CommentsServiceResource($this, $this->serviceName, 'comments', json_decode('{"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/blogger"], "parameters": {"startDate": {"type": "string", "location": "query"}, "postId": {"required": true, "type": "string", "location": "path"}, "maxResults": {"format": "uint32", "type": "integer", "location": "query"}, "pageToken": {"type": "string", "location": "query"}, "fetchBodies": {"type": "boolean", "location": "query"}, "blogId": {"required": true, "type": "string", "location": "path"}}, "id": "blogger.comments.list", "httpMethod": "GET", "path": "blogs/{blogId}/posts/{postId}/comments", "response": {"$ref": "CommentList"}}, "get": {"scopes": ["https://www.googleapis.com/auth/blogger"], "parameters": {"commentId": {"required": true, "type": "string", "location": "path"}, "postId": {"required": true, "type": "string", "location": "path"}, "blogId": {"required": true, "type": "string", "location": "path"}}, "id": "blogger.comments.get", "httpMethod": "GET", "path": "blogs/{blogId}/posts/{postId}/comments/{commentId}", "response": {"$ref": "Comment"}}}}', true));
-    $this->users = new UsersServiceResource($this, $this->serviceName, 'users', json_decode('{"methods": {"get": {"scopes": ["https://www.googleapis.com/auth/blogger"], "parameters": {"userId": {"required": true, "type": "string", "location": "path"}}, "id": "blogger.users.get", "httpMethod": "GET", "path": "users/{userId}", "response": {"$ref": "User"}}}, "resources": {"blogs": {"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/blogger"], "parameters": {"userId": {"required": true, "type": "string", "location": "path"}}, "id": "blogger.users.blogs.list", "httpMethod": "GET", "path": "users/{userId}/blogs", "response": {"$ref": "BlogList"}}}}}}', true));
+    $this->users = new UsersServiceResource($this, $this->serviceName, 'users', json_decode('{"methods": {"get": {"scopes": ["https://www.googleapis.com/auth/blogger"], "parameters": {"userId": {"required": true, "type": "string", "location": "path"}}, "id": "blogger.users.get", "httpMethod": "GET", "path": "users/{userId}", "response": {"$ref": "User"}}}}', true));
+    $this->users_blogs = new UsersBlogsServiceResource($this, $this->serviceName, 'blogs', json_decode('{"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/blogger"], "parameters": {"userId": {"required": true, "type": "string", "location": "path"}}, "id": "blogger.users.blogs.list", "httpMethod": "GET", "path": "users/{userId}/blogs", "response": {"$ref": "BlogList"}}}}', true));
   }
 }
 
@@ -304,14 +311,17 @@ class Blog extends apiModel {
   public $kind;
   public $description;
   protected $__localeType = 'BlogLocale';
+  protected $__localeDataType = '';
   public $locale;
   protected $__postsType = 'BlogPosts';
+  protected $__postsDataType = '';
   public $posts;
   public $updated;
   public $id;
   public $url;
   public $published;
   protected $__pagesType = 'BlogPages';
+  protected $__pagesDataType = '';
   public $pages;
   public $selfLink;
   public $name;
@@ -385,10 +395,11 @@ class Blog extends apiModel {
 
 class BlogList extends apiModel {
   protected $__itemsType = 'Blog';
+  protected $__itemsDataType = 'array';
   public $items;
   public $kind;
   public function setItems(/* array(Blog) */ $items) {
-    $this->assertIsArray($items, Blog, __METHOD__);
+    $this->assertIsArray($items, 'Blog', __METHOD__);
     $this->items = $items;
   }
   public function getItems() {
@@ -464,12 +475,15 @@ class Comment extends apiModel {
   public $content;
   public $kind;
   protected $__authorType = 'CommentAuthor';
+  protected $__authorDataType = '';
   public $author;
   public $updated;
   protected $__blogType = 'CommentBlog';
+  protected $__blogDataType = '';
   public $blog;
   public $published;
   protected $__postType = 'CommentPost';
+  protected $__postDataType = '';
   public $post;
   public $id;
   public $selfLink;
@@ -532,6 +546,7 @@ class Comment extends apiModel {
 class CommentAuthor extends apiModel {
   public $url;
   protected $__imageType = 'CommentAuthorImage';
+  protected $__imageDataType = '';
   public $image;
   public $displayName;
   public $id;
@@ -584,6 +599,7 @@ class CommentBlog extends apiModel {
 class CommentList extends apiModel {
   public $nextPageToken;
   protected $__itemsType = 'Comment';
+  protected $__itemsDataType = 'array';
   public $items;
   public $kind;
   public $prevPageToken;
@@ -594,7 +610,7 @@ class CommentList extends apiModel {
     return $this->nextPageToken;
   }
   public function setItems(/* array(Comment) */ $items) {
-    $this->assertIsArray($items, Comment, __METHOD__);
+    $this->assertIsArray($items, 'Comment', __METHOD__);
     $this->items = $items;
   }
   public function getItems() {
@@ -628,11 +644,13 @@ class Page extends apiModel {
   public $content;
   public $kind;
   protected $__authorType = 'PageAuthor';
+  protected $__authorDataType = '';
   public $author;
   public $url;
   public $title;
   public $updated;
   protected $__blogType = 'PageBlog';
+  protected $__blogDataType = '';
   public $blog;
   public $published;
   public $id;
@@ -702,6 +720,7 @@ class Page extends apiModel {
 class PageAuthor extends apiModel {
   public $url;
   protected $__imageType = 'PageAuthorImage';
+  protected $__imageDataType = '';
   public $image;
   public $displayName;
   public $id;
@@ -753,10 +772,11 @@ class PageBlog extends apiModel {
 
 class PageList extends apiModel {
   protected $__itemsType = 'Page';
+  protected $__itemsDataType = 'array';
   public $items;
   public $kind;
   public function setItems(/* array(Page) */ $items) {
-    $this->assertIsArray($items, Page, __METHOD__);
+    $this->assertIsArray($items, 'Page', __METHOD__);
     $this->items = $items;
   }
   public function getItems() {
@@ -774,12 +794,15 @@ class Post extends apiModel {
   public $content;
   public $kind;
   protected $__authorType = 'PostAuthor';
+  protected $__authorDataType = '';
   public $author;
   protected $__repliesType = 'PostReplies';
+  protected $__repliesDataType = '';
   public $replies;
   public $labels;
   public $updated;
   protected $__blogType = 'PostBlog';
+  protected $__blogDataType = '';
   public $blog;
   public $url;
   public $published;
@@ -811,7 +834,7 @@ class Post extends apiModel {
     return $this->replies;
   }
   public function setLabels(/* array(string) */ $labels) {
-    $this->assertIsArray($labels, string, __METHOD__);
+    $this->assertIsArray($labels, 'string', __METHOD__);
     $this->labels = $labels;
   }
   public function getLabels() {
@@ -864,6 +887,7 @@ class Post extends apiModel {
 class PostAuthor extends apiModel {
   public $url;
   protected $__imageType = 'PostAuthorImage';
+  protected $__imageDataType = '';
   public $image;
   public $displayName;
   public $id;
@@ -916,6 +940,7 @@ class PostBlog extends apiModel {
 class PostList extends apiModel {
   public $nextPageToken;
   protected $__itemsType = 'Post';
+  protected $__itemsDataType = 'array';
   public $items;
   public $kind;
   public $prevPageToken;
@@ -926,7 +951,7 @@ class PostList extends apiModel {
     return $this->nextPageToken;
   }
   public function setItems(/* array(Post) */ $items) {
-    $this->assertIsArray($items, Post, __METHOD__);
+    $this->assertIsArray($items, 'Post', __METHOD__);
     $this->items = $items;
   }
   public function getItems() {
@@ -968,8 +993,10 @@ class User extends apiModel {
   public $displayName;
   public $created;
   protected $__localeType = 'UserLocale';
+  protected $__localeDataType = '';
   public $locale;
   protected $__blogsType = 'UserBlogs';
+  protected $__blogsDataType = '';
   public $blogs;
   public $kind;
   public $url;

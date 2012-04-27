@@ -123,16 +123,17 @@ class Wdgpo_AdminFormRenderer {
 	}
 
 	function create_skip_post_types_box () {
-		$post_types = get_post_types(array('public'=>true), 'names');
+		$post_types = get_post_types(array('public'=>true), 'objects');
+
 		$opt = $this->_get_option();
 		$skip_types = is_array(@$opt['skip_post_types']) ? @$opt['skip_post_types'] : array();
 
 		foreach ($post_types as $tid=>$type) {
-			$checked = in_array($type, $skip_types) ? 'checked="checked"' : '';
+			$checked = in_array($tid, $skip_types) ? 'checked="checked"' : '';
 			echo
-				"<input type='hidden' name='wdgpo[skip_post_types][{$type}]' value='0' />" . // Override for checkbox
-				"<input {$checked} type='checkbox' name='wdgpo[skip_post_types][{$type}]' id='skip_post_types-{$tid}' value='{$type}' /> " .
-				"<label for='skip_post_types-{$tid}'>" . ucfirst($type) . "</label>" .
+				"<input type='hidden' name='wdgpo[skip_post_types][{$tid}]' value='0' />" . // Override for checkbox
+				"<input {$checked} type='checkbox' name='wdgpo[skip_post_types][{$tid}]' id='skip_post_types-{$tid}' value='{$tid}' /> " .
+				"<label for='skip_post_types-{$tid}'>{$type->label}</label>" .
 			"<br />";
 		}
 		_e(
@@ -159,6 +160,16 @@ class Wdgpo_AdminFormRenderer {
 		$gplus_profile_id = esc_attr(@$opt['gplus_profile_id']);
 		echo "<input type='text' name='wdgpo[gplus_profile_id]' class='widefat' value='{$gplus_profile_id}' />";
 		echo '<div><small>' . __('Your Google+ profile ID is the long number at the end of your page URL.', 'wdgpo') . '</small></div>';
+	}
+
+	function create_gplus_profile_fields_box () {
+		echo '<label for="gplus_profile_fields-yes">' . __('Add Google+ profile field to user profile pages', 'wdgpo') . ':</label> ';
+		echo $this->_create_checkbox('gplus_profile_fields');
+		echo '<div><small>' . __('Enabling this option will add a new Google+ profile contact field for your users with posting privileges on their profile page.', 'wdgpo') . '</small></div>';
+		echo '<label for="gplus_autorship_links-yes">' . __('Automatically add authorship links', 'wdgpo') . ':</label> ';
+		echo $this->_create_checkbox('gplus_autorship_links');
+		echo '<div><small>' . __('Enabling this option will automatically add Google+ authorship links to your posts.', 'wdgpo') . '</small></div>';
+		echo '<div><small>' . __('Even if the option is turned off, you will be able to add the links yourself using a shortcode and/or template tag.', 'wdgpo') . '</small></div>';		
 	}
 
 	function create_import_check_box () {

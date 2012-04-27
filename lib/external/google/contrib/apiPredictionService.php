@@ -35,11 +35,12 @@ require_once 'service/apiServiceRequest.php';
      * Submit model id and request a prediction (trainedmodels.predict)
      *
      * @param string $id The unique name for the predictive model.
-     * @param $postBody the {@link Input}
+     * @param Input $postBody
      * @return Output
      */
-    public function predict($id, Input $postBody) {
+    public function predict($id, Input $postBody, $optParams = array()) {
       $params = array('id' => $id, 'postBody' => $postBody);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('predict', array($params));
       if ($this->useObjects()) {
         return new Output($data);
@@ -50,11 +51,12 @@ require_once 'service/apiServiceRequest.php';
     /**
      * Begin training your model. (trainedmodels.insert)
      *
-     * @param $postBody the {@link Training}
+     * @param Training $postBody
      * @return Training
      */
-    public function insert(Training $postBody) {
+    public function insert(Training $postBody, $optParams = array()) {
       $params = array('postBody' => $postBody);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('insert', array($params));
       if ($this->useObjects()) {
         return new Training($data);
@@ -68,8 +70,9 @@ require_once 'service/apiServiceRequest.php';
      * @param string $id The unique name for the predictive model.
      * @return Training
      */
-    public function get($id) {
+    public function get($id, $optParams = array()) {
       $params = array('id' => $id);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('get', array($params));
       if ($this->useObjects()) {
         return new Training($data);
@@ -80,12 +83,13 @@ require_once 'service/apiServiceRequest.php';
     /**
      * Add new data to a trained model. (trainedmodels.update)
      *
-     * @param string $id
-     * @param $postBody the {@link Update}
+     * @param string $id The unique name for the predictive model.
+     * @param Update $postBody
      * @return Training
      */
-    public function update($id, Update $postBody) {
+    public function update($id, Update $postBody, $optParams = array()) {
       $params = array('id' => $id, 'postBody' => $postBody);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('update', array($params));
       if ($this->useObjects()) {
         return new Training($data);
@@ -98,8 +102,9 @@ require_once 'service/apiServiceRequest.php';
      *
      * @param string $id The unique name for the predictive model.
      */
-    public function delete($id) {
+    public function delete($id, $optParams = array()) {
       $params = array('id' => $id);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('delete', array($params));
       return $data;
     }
@@ -120,11 +125,12 @@ require_once 'service/apiServiceRequest.php';
      * Submit input and request an output against a hosted model. (hostedmodels.predict)
      *
      * @param string $hostedModelName The name of a hosted model.
-     * @param $postBody the {@link Input}
+     * @param Input $postBody
      * @return Output
      */
-    public function predict($hostedModelName, Input $postBody) {
+    public function predict($hostedModelName, Input $postBody, $optParams = array()) {
       $params = array('hostedModelName' => $hostedModelName, 'postBody' => $postBody);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('predict', array($params));
       if ($this->useObjects()) {
         return new Output($data);
@@ -163,7 +169,6 @@ class apiPredictionService extends apiService {
     $this->restBasePath = '/prediction/v1.4/';
     $this->version = 'v1.4';
     $this->serviceName = 'prediction';
-    $this->io = $apiClient->getIo();
 
     $apiClient->addService($this->serviceName, $this->version);
     $this->trainedmodels = new TrainedmodelsServiceResource($this, $this->serviceName, 'trainedmodels', json_decode('{"methods": {"predict": {"scopes": ["https://www.googleapis.com/auth/prediction"], "parameters": {"id": {"required": true, "type": "string", "location": "path"}}, "request": {"$ref": "Input"}, "id": "prediction.trainedmodels.predict", "httpMethod": "POST", "path": "trainedmodels/{id}/predict", "response": {"$ref": "Output"}}, "insert": {"scopes": ["https://www.googleapis.com/auth/prediction"], "request": {"$ref": "Training"}, "response": {"$ref": "Training"}, "httpMethod": "POST", "path": "trainedmodels", "id": "prediction.trainedmodels.insert"}, "delete": {"scopes": ["https://www.googleapis.com/auth/prediction"], "parameters": {"id": {"required": true, "type": "string", "location": "path"}}, "httpMethod": "DELETE", "path": "trainedmodels/{id}", "id": "prediction.trainedmodels.delete"}, "update": {"scopes": ["https://www.googleapis.com/auth/prediction"], "parameters": {"id": {"required": true, "type": "string", "location": "path"}}, "request": {"$ref": "Update"}, "id": "prediction.trainedmodels.update", "httpMethod": "PUT", "path": "trainedmodels/{id}", "response": {"$ref": "Training"}}, "get": {"scopes": ["https://www.googleapis.com/auth/prediction"], "parameters": {"id": {"required": true, "type": "string", "location": "path"}}, "id": "prediction.trainedmodels.get", "httpMethod": "GET", "path": "trainedmodels/{id}", "response": {"$ref": "Training"}}}}', true));
@@ -173,6 +178,7 @@ class apiPredictionService extends apiService {
 
 class Input extends apiModel {
   protected $__inputType = 'InputInput';
+  protected $__inputDataType = '';
   public $input;
   public function setInput(InputInput $input) {
     $this->input = $input;
@@ -185,7 +191,7 @@ class Input extends apiModel {
 class InputInput extends apiModel {
   public $csvInstance;
   public function setCsvInstance(/* array(object) */ $csvInstance) {
-    $this->assertIsArray($csvInstance, object, __METHOD__);
+    $this->assertIsArray($csvInstance, 'object', __METHOD__);
     $this->csvInstance = $csvInstance;
   }
   public function getCsvInstance() {
@@ -198,6 +204,7 @@ class Output extends apiModel {
   public $outputLabel;
   public $id;
   protected $__outputMultiType = 'OutputOutputMulti';
+  protected $__outputMultiDataType = 'array';
   public $outputMulti;
   public $outputValue;
   public $selfLink;
@@ -220,7 +227,7 @@ class Output extends apiModel {
     return $this->id;
   }
   public function setOutputMulti(/* array(OutputOutputMulti) */ $outputMulti) {
-    $this->assertIsArray($outputMulti, OutputOutputMulti, __METHOD__);
+    $this->assertIsArray($outputMulti, 'OutputOutputMulti', __METHOD__);
     $this->outputMulti = $outputMulti;
   }
   public function getOutputMulti() {
@@ -261,9 +268,11 @@ class Training extends apiModel {
   public $kind;
   public $storageDataLocation;
   protected $__dataAnalysisType = 'TrainingDataAnalysis';
+  protected $__dataAnalysisDataType = '';
   public $dataAnalysis;
   public $trainingStatus;
   protected $__modelInfoType = 'TrainingModelInfo';
+  protected $__modelInfoDataType = '';
   public $modelInfo;
   public $storagePMMLLocation;
   public $id;
@@ -318,7 +327,7 @@ class Training extends apiModel {
     return $this->selfLink;
   }
   public function setUtility(/* array(double) */ $utility) {
-    $this->assertIsArray($utility, double, __METHOD__);
+    $this->assertIsArray($utility, 'double', __METHOD__);
     $this->utility = $utility;
   }
   public function getUtility() {
@@ -329,7 +338,7 @@ class Training extends apiModel {
 class TrainingDataAnalysis extends apiModel {
   public $warnings;
   public function setWarnings(/* array(string) */ $warnings) {
-    $this->assertIsArray($warnings, string, __METHOD__);
+    $this->assertIsArray($warnings, 'string', __METHOD__);
     $this->warnings = $warnings;
   }
   public function getWarnings() {
@@ -400,7 +409,7 @@ class Update extends apiModel {
   public $csvInstance;
   public $label;
   public function setCsvInstance(/* array(object) */ $csvInstance) {
-    $this->assertIsArray($csvInstance, object, __METHOD__);
+    $this->assertIsArray($csvInstance, 'object', __METHOD__);
     $this->csvInstance = $csvInstance;
   }
   public function getCsvInstance() {

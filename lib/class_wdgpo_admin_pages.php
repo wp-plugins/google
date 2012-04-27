@@ -50,6 +50,7 @@ class Wdgpo_AdminPages {
 		add_settings_section('wdgpo_gplus_pages', __('Google+ Pages and Profiles', 'wdgpo'), create_function('', ''), 'wdgpo_options_page');
 		add_settings_field('wdgpo_gplus_page_id', __('My Google+ page ID', 'wdgpo'), array($form, 'create_gplus_page_id_box'), 'wdgpo_options_page', 'wdgpo_gplus_pages');
 		add_settings_field('wdgpo_gplus_profile_id', __('My Google+ profile ID', 'wdgpo'), array($form, 'create_gplus_profile_id_box'), 'wdgpo_options_page', 'wdgpo_gplus_pages');
+		add_settings_field('wdgpo_gplus_profile_fields', __('Google+ author profile fields', 'wdgpo'), array($form, 'create_gplus_profile_fields_box'), 'wdgpo_options_page', 'wdgpo_gplus_pages');
 
 		add_settings_section('wdgpo_gplus_import', __('Google+ activities import', 'wdgpo'), array($form, 'create_import_check_box'), 'wdgpo_options_page');
 		if (function_exists('curl_init')) {
@@ -68,6 +69,11 @@ class Wdgpo_AdminPages {
 
 	function create_admin_page () {
 		include(WDGPO_PLUGIN_BASE_DIR . '/lib/forms/plugin_settings.php');
+	}
+
+	function generate_profile_fields ($fields) {
+		$fields['wdgpo_gplus'] = __('Google+ Profile', 'wdgpo');
+		return $fields;
 	}
 
 	function js_print_scripts () {
@@ -114,13 +120,17 @@ class Wdgpo_AdminPages {
 	function add_hooks () {
 		// Step0: Register options and menu
 		add_action('admin_init', array($this, 'register_settings'));
-		if (WP_NETWORK_ADMIN) {
+		if (is_network_admin()) {
 			add_action('network_admin_menu', array($this, 'create_site_admin_menu_entry'));
 		} else {
 			add_action('admin_menu', array($this, 'create_blog_admin_menu_entry'));
 		}
 
 		add_action('admin_print_scripts', array($this, 'js_print_scripts'));
+		
+		if ($this->data->get_option('gplus_profile_fields')) {
+			add_filter('user_contactmethods', array($this, 'generate_profile_fields'));
+		}
 
 		// Register the shortcodes, so Membership picks them up
 		$rpl = new Wdgpo_Codec; $rpl->register();

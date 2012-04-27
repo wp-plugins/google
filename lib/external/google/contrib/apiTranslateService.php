@@ -68,8 +68,9 @@ require_once 'service/apiServiceRequest.php';
      * @param string $q The text to detect
      * @return DetectionsListResponse
      */
-    public function listDetections($q) {
+    public function listDetections($q, $optParams = array()) {
       $params = array('q' => $q);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('list', array($params));
       if ($this->useObjects()) {
         return new DetectionsListResponse($data);
@@ -144,7 +145,6 @@ class apiTranslateService extends apiService {
     $this->restBasePath = '/language/translate/';
     $this->version = 'v2';
     $this->serviceName = 'translate';
-    $this->io = $apiClient->getIo();
 
     $apiClient->addService($this->serviceName, $this->version);
     $this->languages = new LanguagesServiceResource($this, $this->serviceName, 'languages', json_decode('{"methods": {"list": {"parameters": {"target": {"type": "string", "location": "query"}}, "id": "language.languages.list", "httpMethod": "GET", "path": "v2/languages", "response": {"$ref": "LanguagesListResponse"}}}}', true));
@@ -155,9 +155,10 @@ class apiTranslateService extends apiService {
 
 class DetectionsListResponse extends apiModel {
   protected $__detectionsType = 'DetectionsResourceItems';
+  protected $__detectionsDataType = 'array';
   public $detections;
   public function setDetections(/* array(DetectionsResourceItems) */ $detections) {
-    $this->assertIsArray($detections, DetectionsResourceItems, __METHOD__);
+    $this->assertIsArray($detections, 'DetectionsResourceItems', __METHOD__);
     $this->detections = $detections;
   }
   public function getDetections() {
@@ -194,9 +195,10 @@ class DetectionsResourceItems extends apiModel {
 
 class LanguagesListResponse extends apiModel {
   protected $__languagesType = 'LanguagesResource';
+  protected $__languagesDataType = 'array';
   public $languages;
   public function setLanguages(/* array(LanguagesResource) */ $languages) {
-    $this->assertIsArray($languages, LanguagesResource, __METHOD__);
+    $this->assertIsArray($languages, 'LanguagesResource', __METHOD__);
     $this->languages = $languages;
   }
   public function getLanguages() {
@@ -223,9 +225,10 @@ class LanguagesResource extends apiModel {
 
 class TranslationsListResponse extends apiModel {
   protected $__translationsType = 'TranslationsResource';
+  protected $__translationsDataType = 'array';
   public $translations;
   public function setTranslations(/* array(TranslationsResource) */ $translations) {
-    $this->assertIsArray($translations, TranslationsResource, __METHOD__);
+    $this->assertIsArray($translations, 'TranslationsResource', __METHOD__);
     $this->translations = $translations;
   }
   public function getTranslations() {

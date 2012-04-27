@@ -73,6 +73,7 @@ require_once 'service/apiServiceRequest.php';
      * @opt_param bool html_escape Whether or not to escape entities.
      * @opt_param string indent How many spaces to indent the json.
      * @opt_param string uniqueness_failure How MQL responds to uniqueness failures.
+     * @opt_param string dateline The dateline that you get in a mqlwrite response to ensure consistent results.
      * @opt_param string cursor The mql cursor.
      * @opt_param string callback JS method name for JSONP callbacks.
      * @opt_param bool cost Show the costs or not.
@@ -133,6 +134,8 @@ require_once 'service/apiServiceRequest.php';
  * @author Google, Inc.
  */
 class apiFreebaseService extends apiService {
+  public $mqlread;
+  public $image;
   public $text;
   /**
    * Constructs the internal representation of the Freebase service.
@@ -144,10 +147,11 @@ class apiFreebaseService extends apiService {
     $this->restBasePath = '/freebase/v1/';
     $this->version = 'v1';
     $this->serviceName = 'freebase';
-    $this->io = $apiClient->getIo();
 
     $apiClient->addService($this->serviceName, $this->version);
     $this->text = new TextServiceResource($this, $this->serviceName, 'text', json_decode('{"methods": {"get": {"parameters": {"format": {"default": "plain", "enum": ["html", "plain", "raw"], "location": "query", "type": "string"}, "id": {"repeated": true, "required": true, "type": "string", "location": "path"}, "maxlength": {"format": "uint32", "type": "integer", "location": "query"}}, "id": "freebase.text.get", "httpMethod": "GET", "path": "text{/id*}", "response": {"$ref": "ContentserviceGet"}}}}', true));
+    $this->mqlread = new MqlreadServiceResource($this, $this->serviceName, 'mqlread', json_decode('{"httpMethod": "GET", "parameters": {"lang": {"default": "/lang/en", "type": "string", "location": "query"}, "cursor": {"type": "string", "location": "query"}, "indent": {"format": "uint32", "default": "0", "maximum": "10", "location": "query", "type": "integer"}, "uniqueness_failure": {"default": "hard", "enum": ["hard", "soft"], "location": "query", "type": "string"}, "dateline": {"type": "string", "location": "query"}, "html_escape": {"default": "true", "type": "boolean", "location": "query"}, "callback": {"type": "string", "location": "query"}, "cost": {"default": "false", "type": "boolean", "location": "query"}, "query": {"required": true, "type": "string", "location": "query"}, "as_of_time": {"type": "string", "location": "query"}}, "path": "mqlread", "id": "freebase.mqlread"}', true));
+    $this->image = new ImageServiceResource($this, $this->serviceName, 'image', json_decode('{"httpMethod": "GET", "parameters": {"maxwidth": {"format": "uint32", "type": "integer", "location": "query", "maximum": "4096"}, "maxheight": {"format": "uint32", "type": "integer", "location": "query", "maximum": "4096"}, "fallbackid": {"default": "/freebase/no_image_png", "type": "string", "location": "query"}, "pad": {"default": "false", "type": "boolean", "location": "query"}, "mode": {"default": "fit", "enum": ["fill", "fillcrop", "fillcropmid", "fit"], "location": "query", "type": "string"}, "id": {"repeated": true, "required": true, "type": "string", "location": "path"}}, "path": "image{/id*}", "id": "freebase.image"}', true));
   }
 }
 

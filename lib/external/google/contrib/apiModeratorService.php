@@ -37,7 +37,7 @@ require_once 'service/apiServiceRequest.php';
      *
      * @param string $seriesId The decimal ID of the Series.
      * @param string $submissionId The decimal ID of the Submission within the Series.
-     * @param $postBody the {@link Vote}
+     * @param Vote $postBody
      * @param array $optParams Optional parameters. Valid optional parameters are listed below.
      *
      * @opt_param string unauthToken User identifier for unauthenticated usage mode
@@ -59,7 +59,7 @@ require_once 'service/apiServiceRequest.php';
      *
      * @param string $seriesId The decimal ID of the Series.
      * @param string $submissionId The decimal ID of the Submission within the Series.
-     * @param $postBody the {@link Vote}
+     * @param Vote $postBody
      * @param array $optParams Optional parameters. Valid optional parameters are listed below.
      *
      * @opt_param string userId
@@ -102,7 +102,7 @@ require_once 'service/apiServiceRequest.php';
      *
      * @param string $seriesId The decimal ID of the Series.
      * @param string $submissionId The decimal ID of the Submission within the Series.
-     * @param $postBody the {@link Vote}
+     * @param Vote $postBody
      * @param array $optParams Optional parameters. Valid optional parameters are listed below.
      *
      * @opt_param string userId
@@ -161,7 +161,7 @@ require_once 'service/apiServiceRequest.php';
      * @param string $seriesId The decimal ID of the Series.
      * @param string $topicId The decimal ID of the Topic within the Series.
      * @param string $parentSubmissionId The decimal ID of the parent Submission within the Series.
-     * @param $postBody the {@link Submission}
+     * @param Submission $postBody
      * @param array $optParams Optional parameters. Valid optional parameters are listed below.
      *
      * @opt_param string unauthToken User identifier for unauthenticated usage mode
@@ -222,11 +222,12 @@ require_once 'service/apiServiceRequest.php';
      *
      * @param string $seriesId The decimal ID of the Series.
      * @param string $submissionId The decimal ID of the Submission within the Series.
-     * @param $postBody the {@link Tag}
+     * @param Tag $postBody
      * @return Tag
      */
-    public function insert($seriesId, $submissionId, Tag $postBody) {
+    public function insert($seriesId, $submissionId, Tag $postBody, $optParams = array()) {
       $params = array('seriesId' => $seriesId, 'submissionId' => $submissionId, 'postBody' => $postBody);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('insert', array($params));
       if ($this->useObjects()) {
         return new Tag($data);
@@ -241,8 +242,9 @@ require_once 'service/apiServiceRequest.php';
      * @param string $submissionId The decimal ID of the Submission within the Series.
      * @return TagList
      */
-    public function listTags($seriesId, $submissionId) {
+    public function listTags($seriesId, $submissionId, $optParams = array()) {
       $params = array('seriesId' => $seriesId, 'submissionId' => $submissionId);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('list', array($params));
       if ($this->useObjects()) {
         return new TagList($data);
@@ -258,8 +260,9 @@ require_once 'service/apiServiceRequest.php';
      * @param string $submissionId The decimal ID of the Submission within the Series.
      * @param string $tagId
      */
-    public function delete($seriesId, $submissionId, $tagId) {
+    public function delete($seriesId, $submissionId, $tagId, $optParams = array()) {
       $params = array('seriesId' => $seriesId, 'submissionId' => $submissionId, 'tagId' => $tagId);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('delete', array($params));
       return $data;
     }
@@ -279,11 +282,12 @@ require_once 'service/apiServiceRequest.php';
     /**
      * Inserts a new series. (series.insert)
      *
-     * @param $postBody the {@link Series}
+     * @param Series $postBody
      * @return Series
      */
-    public function insert(Series $postBody) {
+    public function insert(Series $postBody, $optParams = array()) {
       $params = array('postBody' => $postBody);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('insert', array($params));
       if ($this->useObjects()) {
         return new Series($data);
@@ -295,11 +299,12 @@ require_once 'service/apiServiceRequest.php';
      * Updates the specified series. This method supports patch semantics. (series.patch)
      *
      * @param string $seriesId The decimal ID of the Series.
-     * @param $postBody the {@link Series}
+     * @param Series $postBody
      * @return Series
      */
-    public function patch($seriesId, Series $postBody) {
+    public function patch($seriesId, Series $postBody, $optParams = array()) {
       $params = array('seriesId' => $seriesId, 'postBody' => $postBody);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('patch', array($params));
       if ($this->useObjects()) {
         return new Series($data);
@@ -331,11 +336,12 @@ require_once 'service/apiServiceRequest.php';
      * Updates the specified series. (series.update)
      *
      * @param string $seriesId The decimal ID of the Series.
-     * @param $postBody the {@link Series}
+     * @param Series $postBody
      * @return Series
      */
-    public function update($seriesId, Series $postBody) {
+    public function update($seriesId, Series $postBody, $optParams = array()) {
       $params = array('seriesId' => $seriesId, 'postBody' => $postBody);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('update', array($params));
       if ($this->useObjects()) {
         return new Series($data);
@@ -349,8 +355,9 @@ require_once 'service/apiServiceRequest.php';
      * @param string $seriesId The decimal ID of the Series.
      * @return Series
      */
-    public function get($seriesId) {
+    public function get($seriesId, $optParams = array()) {
       $params = array('seriesId' => $seriesId);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('get', array($params));
       if ($this->useObjects()) {
         return new Series($data);
@@ -452,11 +459,12 @@ require_once 'service/apiServiceRequest.php';
      * Inserts a new topic into the specified series. (topics.insert)
      *
      * @param string $seriesId The decimal ID of the Series.
-     * @param $postBody the {@link Topic}
+     * @param Topic $postBody
      * @return Topic
      */
-    public function insert($seriesId, Topic $postBody) {
+    public function insert($seriesId, Topic $postBody, $optParams = array()) {
       $params = array('seriesId' => $seriesId, 'postBody' => $postBody);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('insert', array($params));
       if ($this->useObjects()) {
         return new Topic($data);
@@ -491,11 +499,12 @@ require_once 'service/apiServiceRequest.php';
      *
      * @param string $seriesId The decimal ID of the Series.
      * @param string $topicId The decimal ID of the Topic within the Series.
-     * @param $postBody the {@link Topic}
+     * @param Topic $postBody
      * @return Topic
      */
-    public function update($seriesId, $topicId, Topic $postBody) {
+    public function update($seriesId, $topicId, Topic $postBody, $optParams = array()) {
       $params = array('seriesId' => $seriesId, 'topicId' => $topicId, 'postBody' => $postBody);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('update', array($params));
       if ($this->useObjects()) {
         return new Topic($data);
@@ -510,8 +519,9 @@ require_once 'service/apiServiceRequest.php';
      * @param string $topicId The decimal ID of the Topic within the Series.
      * @return Topic
      */
-    public function get($seriesId, $topicId) {
+    public function get($seriesId, $topicId, $optParams = array()) {
       $params = array('seriesId' => $seriesId, 'topicId' => $topicId);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('get', array($params));
       if ($this->useObjects()) {
         return new Topic($data);
@@ -624,11 +634,12 @@ require_once 'service/apiServiceRequest.php';
      * Updates the profile information for the authenticated user. This method supports patch semantics.
      * (profiles.patch)
      *
-     * @param $postBody the {@link Profile}
+     * @param Profile $postBody
      * @return Profile
      */
-    public function patch(Profile $postBody) {
+    public function patch(Profile $postBody, $optParams = array()) {
       $params = array('postBody' => $postBody);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('patch', array($params));
       if ($this->useObjects()) {
         return new Profile($data);
@@ -639,11 +650,12 @@ require_once 'service/apiServiceRequest.php';
     /**
      * Updates the profile information for the authenticated user. (profiles.update)
      *
-     * @param $postBody the {@link Profile}
+     * @param Profile $postBody
      * @return Profile
      */
-    public function update(Profile $postBody) {
+    public function update(Profile $postBody, $optParams = array()) {
       $params = array('postBody' => $postBody);
+      $params = array_merge($params, $optParams);
       $data = $this->__call('update', array($params));
       if ($this->useObjects()) {
         return new Profile($data);
@@ -656,8 +668,9 @@ require_once 'service/apiServiceRequest.php';
      *
      * @return Profile
      */
-    public function get() {
+    public function get($optParams = array()) {
       $params = array();
+      $params = array_merge($params, $optParams);
       $data = $this->__call('get', array($params));
       if ($this->useObjects()) {
         return new Profile($data);
@@ -697,8 +710,9 @@ require_once 'service/apiServiceRequest.php';
      *
      * @return SeriesList
      */
-    public function listFeaturedSeries() {
+    public function listFeaturedSeries($optParams = array()) {
       $params = array();
+      $params = array_merge($params, $optParams);
       $data = $this->__call('list', array($params));
       if ($this->useObjects()) {
         return new SeriesList($data);
@@ -738,8 +752,9 @@ require_once 'service/apiServiceRequest.php';
      *
      * @return SeriesList
      */
-    public function listMyrecentSeries() {
+    public function listMyrecentSeries($optParams = array()) {
       $params = array();
+      $params = array_merge($params, $optParams);
       $data = $this->__call('list', array($params));
       if ($this->useObjects()) {
         return new SeriesList($data);
@@ -779,8 +794,9 @@ require_once 'service/apiServiceRequest.php';
      *
      * @return SeriesList
      */
-    public function listMySeries() {
+    public function listMySeries($optParams = array()) {
       $params = array();
+      $params = array_merge($params, $optParams);
       $data = $this->__call('list', array($params));
       if ($this->useObjects()) {
         return new SeriesList($data);
@@ -806,7 +822,7 @@ require_once 'service/apiServiceRequest.php';
      *
      * @param string $seriesId The decimal ID of the Series.
      * @param string $topicId The decimal ID of the Topic within the Series.
-     * @param $postBody the {@link Submission}
+     * @param Submission $postBody
      * @param array $optParams Optional parameters. Valid optional parameters are listed below.
      *
      * @opt_param string unauthToken User identifier for unauthenticated usage mode
@@ -867,12 +883,19 @@ class apiModeratorService extends apiService {
   public $responses;
   public $tags;
   public $series;
+  public $series_submissions;
+  public $series_responses;
   public $topics;
+  public $topics_submissions;
   public $global;
+  public $global_series;
   public $profiles;
   public $featured;
+  public $featured_series;
   public $myrecent;
+  public $myrecent_series;
   public $my;
+  public $my_series;
   public $submissions;
   /**
    * Constructs the internal representation of the Moderator service.
@@ -884,25 +907,32 @@ class apiModeratorService extends apiService {
     $this->restBasePath = '/moderator/v1/';
     $this->version = 'v1';
     $this->serviceName = 'moderator';
-    $this->io = $apiClient->getIo();
 
     $apiClient->addService($this->serviceName, $this->version);
     $this->votes = new VotesServiceResource($this, $this->serviceName, 'votes', json_decode('{"methods": {"insert": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "unauthToken": {"type": "string", "location": "query"}, "submissionId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "request": {"$ref": "Vote"}, "id": "moderator.votes.insert", "httpMethod": "POST", "path": "series/{seriesId}/submissions/{submissionId}/votes/@me", "response": {"$ref": "Vote"}}, "get": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "userId": {"type": "string", "location": "query"}, "unauthToken": {"type": "string", "location": "query"}, "submissionId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "id": "moderator.votes.get", "httpMethod": "GET", "path": "series/{seriesId}/submissions/{submissionId}/votes/@me", "response": {"$ref": "Vote"}}, "list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"max-results": {"format": "uint32", "type": "integer", "location": "query"}, "seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "start-index": {"format": "uint32", "type": "integer", "location": "query"}}, "id": "moderator.votes.list", "httpMethod": "GET", "path": "series/{seriesId}/votes/@me", "response": {"$ref": "VoteList"}}, "update": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "userId": {"type": "string", "location": "query"}, "unauthToken": {"type": "string", "location": "query"}, "submissionId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "request": {"$ref": "Vote"}, "id": "moderator.votes.update", "httpMethod": "PUT", "path": "series/{seriesId}/submissions/{submissionId}/votes/@me", "response": {"$ref": "Vote"}}, "patch": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "userId": {"type": "string", "location": "query"}, "unauthToken": {"type": "string", "location": "query"}, "submissionId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "request": {"$ref": "Vote"}, "id": "moderator.votes.patch", "httpMethod": "PATCH", "path": "series/{seriesId}/submissions/{submissionId}/votes/@me", "response": {"$ref": "Vote"}}}}', true));
     $this->responses = new ResponsesServiceResource($this, $this->serviceName, 'responses', json_decode('{"methods": {"insert": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "parentSubmissionId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "unauthToken": {"type": "string", "location": "query"}, "anonymous": {"type": "boolean", "location": "query"}, "topicId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "request": {"$ref": "Submission"}, "id": "moderator.responses.insert", "httpMethod": "POST", "path": "series/{seriesId}/topics/{topicId}/submissions/{parentSubmissionId}/responses", "response": {"$ref": "Submission"}}, "list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"max-results": {"format": "uint32", "type": "integer", "location": "query"}, "sort": {"type": "string", "location": "query"}, "seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "author": {"type": "string", "location": "query"}, "start-index": {"format": "uint32", "type": "integer", "location": "query"}, "submissionId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "q": {"type": "string", "location": "query"}, "hasAttachedVideo": {"type": "boolean", "location": "query"}}, "id": "moderator.responses.list", "httpMethod": "GET", "path": "series/{seriesId}/submissions/{submissionId}/responses", "response": {"$ref": "SubmissionList"}}}}', true));
     $this->tags = new TagsServiceResource($this, $this->serviceName, 'tags', json_decode('{"methods": {"insert": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "submissionId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "request": {"$ref": "Tag"}, "id": "moderator.tags.insert", "httpMethod": "POST", "path": "series/{seriesId}/submissions/{submissionId}/tags", "response": {"$ref": "Tag"}}, "list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "submissionId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "id": "moderator.tags.list", "httpMethod": "GET", "path": "series/{seriesId}/submissions/{submissionId}/tags", "response": {"$ref": "TagList"}}, "delete": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "tagId": {"required": true, "type": "string", "location": "path"}, "submissionId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "httpMethod": "DELETE", "path": "series/{seriesId}/submissions/{submissionId}/tags/{tagId}", "id": "moderator.tags.delete"}}}', true));
-    $this->series = new SeriesServiceResource($this, $this->serviceName, 'series', json_decode('{"methods": {"insert": {"scopes": ["https://www.googleapis.com/auth/moderator"], "request": {"$ref": "Series"}, "response": {"$ref": "Series"}, "httpMethod": "POST", "path": "series", "id": "moderator.series.insert"}, "get": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "id": "moderator.series.get", "httpMethod": "GET", "path": "series/{seriesId}", "response": {"$ref": "Series"}}, "list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"max-results": {"format": "uint32", "type": "integer", "location": "query"}, "q": {"type": "string", "location": "query"}, "start-index": {"format": "uint32", "type": "integer", "location": "query"}}, "response": {"$ref": "SeriesList"}, "httpMethod": "GET", "path": "series", "id": "moderator.series.list"}, "update": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "request": {"$ref": "Series"}, "id": "moderator.series.update", "httpMethod": "PUT", "path": "series/{seriesId}", "response": {"$ref": "Series"}}, "patch": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "request": {"$ref": "Series"}, "id": "moderator.series.patch", "httpMethod": "PATCH", "path": "series/{seriesId}", "response": {"$ref": "Series"}}}, "resources": {"submissions": {"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"lang": {"type": "string", "location": "query"}, "max-results": {"format": "uint32", "type": "integer", "location": "query"}, "seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "author": {"type": "string", "location": "query"}, "start-index": {"format": "uint32", "type": "integer", "location": "query"}, "includeVotes": {"type": "boolean", "location": "query"}, "sort": {"type": "string", "location": "query"}, "q": {"type": "string", "location": "query"}, "hasAttachedVideo": {"type": "boolean", "location": "query"}}, "id": "moderator.series.submissions.list", "httpMethod": "GET", "path": "series/{seriesId}/submissions", "response": {"$ref": "SubmissionList"}}}}, "responses": {"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"max-results": {"format": "uint32", "type": "integer", "location": "query"}, "sort": {"type": "string", "location": "query"}, "seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "author": {"type": "string", "location": "query"}, "start-index": {"format": "uint32", "type": "integer", "location": "query"}, "q": {"type": "string", "location": "query"}, "hasAttachedVideo": {"type": "boolean", "location": "query"}}, "id": "moderator.series.responses.list", "httpMethod": "GET", "path": "series/{seriesId}/responses", "response": {"$ref": "SeriesList"}}}}}}', true));
-    $this->topics = new TopicsServiceResource($this, $this->serviceName, 'topics', json_decode('{"methods": {"insert": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "request": {"$ref": "Topic"}, "id": "moderator.topics.insert", "httpMethod": "POST", "path": "series/{seriesId}/topics", "response": {"$ref": "Topic"}}, "list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"max-results": {"format": "uint32", "type": "integer", "location": "query"}, "q": {"type": "string", "location": "query"}, "start-index": {"format": "uint32", "type": "integer", "location": "query"}, "mode": {"type": "string", "location": "query"}, "seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "id": "moderator.topics.list", "httpMethod": "GET", "path": "series/{seriesId}/topics", "response": {"$ref": "TopicList"}}, "update": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "topicId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "request": {"$ref": "Topic"}, "id": "moderator.topics.update", "httpMethod": "PUT", "path": "series/{seriesId}/topics/{topicId}", "response": {"$ref": "Topic"}}, "get": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "topicId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "id": "moderator.topics.get", "httpMethod": "GET", "path": "series/{seriesId}/topics/{topicId}", "response": {"$ref": "Topic"}}}, "resources": {"submissions": {"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"max-results": {"format": "uint32", "type": "integer", "location": "query"}, "seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "includeVotes": {"type": "boolean", "location": "query"}, "topicId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "start-index": {"format": "uint32", "type": "integer", "location": "query"}, "author": {"type": "string", "location": "query"}, "sort": {"type": "string", "location": "query"}, "q": {"type": "string", "location": "query"}, "hasAttachedVideo": {"type": "boolean", "location": "query"}}, "id": "moderator.topics.submissions.list", "httpMethod": "GET", "path": "series/{seriesId}/topics/{topicId}/submissions", "response": {"$ref": "SubmissionList"}}}}}}', true));
-    $this->global = new ModeratorGlobalServiceResource($this, $this->serviceName, 'global', json_decode('{"resources": {"series": {"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"max-results": {"format": "uint32", "type": "integer", "location": "query"}, "q": {"type": "string", "location": "query"}, "start-index": {"format": "uint32", "type": "integer", "location": "query"}}, "response": {"$ref": "SeriesList"}, "httpMethod": "GET", "path": "search", "id": "moderator.global.series.list"}}}}}', true));
+    $this->series = new SeriesServiceResource($this, $this->serviceName, 'series', json_decode('{"methods": {"insert": {"scopes": ["https://www.googleapis.com/auth/moderator"], "request": {"$ref": "Series"}, "response": {"$ref": "Series"}, "httpMethod": "POST", "path": "series", "id": "moderator.series.insert"}, "get": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "id": "moderator.series.get", "httpMethod": "GET", "path": "series/{seriesId}", "response": {"$ref": "Series"}}, "list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"max-results": {"format": "uint32", "type": "integer", "location": "query"}, "q": {"type": "string", "location": "query"}, "start-index": {"format": "uint32", "type": "integer", "location": "query"}}, "response": {"$ref": "SeriesList"}, "httpMethod": "GET", "path": "series", "id": "moderator.series.list"}, "update": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "request": {"$ref": "Series"}, "id": "moderator.series.update", "httpMethod": "PUT", "path": "series/{seriesId}", "response": {"$ref": "Series"}}, "patch": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "request": {"$ref": "Series"}, "id": "moderator.series.patch", "httpMethod": "PATCH", "path": "series/{seriesId}", "response": {"$ref": "Series"}}}}', true));
+    $this->series_submissions = new SeriesSubmissionsServiceResource($this, $this->serviceName, 'submissions', json_decode('{"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"lang": {"type": "string", "location": "query"}, "max-results": {"format": "uint32", "type": "integer", "location": "query"}, "seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "author": {"type": "string", "location": "query"}, "start-index": {"format": "uint32", "type": "integer", "location": "query"}, "includeVotes": {"type": "boolean", "location": "query"}, "sort": {"type": "string", "location": "query"}, "q": {"type": "string", "location": "query"}, "hasAttachedVideo": {"type": "boolean", "location": "query"}}, "id": "moderator.series.submissions.list", "httpMethod": "GET", "path": "series/{seriesId}/submissions", "response": {"$ref": "SubmissionList"}}}}', true));
+    $this->series_responses = new SeriesResponsesServiceResource($this, $this->serviceName, 'responses', json_decode('{"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"max-results": {"format": "uint32", "type": "integer", "location": "query"}, "sort": {"type": "string", "location": "query"}, "seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "author": {"type": "string", "location": "query"}, "start-index": {"format": "uint32", "type": "integer", "location": "query"}, "q": {"type": "string", "location": "query"}, "hasAttachedVideo": {"type": "boolean", "location": "query"}}, "id": "moderator.series.responses.list", "httpMethod": "GET", "path": "series/{seriesId}/responses", "response": {"$ref": "SeriesList"}}}}', true));
+    $this->topics = new TopicsServiceResource($this, $this->serviceName, 'topics', json_decode('{"methods": {"insert": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "request": {"$ref": "Topic"}, "id": "moderator.topics.insert", "httpMethod": "POST", "path": "series/{seriesId}/topics", "response": {"$ref": "Topic"}}, "list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"max-results": {"format": "uint32", "type": "integer", "location": "query"}, "q": {"type": "string", "location": "query"}, "start-index": {"format": "uint32", "type": "integer", "location": "query"}, "mode": {"type": "string", "location": "query"}, "seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "id": "moderator.topics.list", "httpMethod": "GET", "path": "series/{seriesId}/topics", "response": {"$ref": "TopicList"}}, "update": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "topicId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "request": {"$ref": "Topic"}, "id": "moderator.topics.update", "httpMethod": "PUT", "path": "series/{seriesId}/topics/{topicId}", "response": {"$ref": "Topic"}}, "get": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "topicId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "id": "moderator.topics.get", "httpMethod": "GET", "path": "series/{seriesId}/topics/{topicId}", "response": {"$ref": "Topic"}}}}', true));
+    $this->topics_submissions = new TopicsSubmissionsServiceResource($this, $this->serviceName, 'submissions', json_decode('{"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"max-results": {"format": "uint32", "type": "integer", "location": "query"}, "seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "includeVotes": {"type": "boolean", "location": "query"}, "topicId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "start-index": {"format": "uint32", "type": "integer", "location": "query"}, "author": {"type": "string", "location": "query"}, "sort": {"type": "string", "location": "query"}, "q": {"type": "string", "location": "query"}, "hasAttachedVideo": {"type": "boolean", "location": "query"}}, "id": "moderator.topics.submissions.list", "httpMethod": "GET", "path": "series/{seriesId}/topics/{topicId}/submissions", "response": {"$ref": "SubmissionList"}}}}', true));
+    $this->global = new ModeratorGlobalServiceResource($this, $this->serviceName, 'global', json_decode('{}', true));
+    $this->global_series = new ModeratorGlobalSeriesServiceResource($this, $this->serviceName, 'series', json_decode('{"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"max-results": {"format": "uint32", "type": "integer", "location": "query"}, "q": {"type": "string", "location": "query"}, "start-index": {"format": "uint32", "type": "integer", "location": "query"}}, "response": {"$ref": "SeriesList"}, "httpMethod": "GET", "path": "search", "id": "moderator.global.series.list"}}}', true));
     $this->profiles = new ProfilesServiceResource($this, $this->serviceName, 'profiles', json_decode('{"methods": {"get": {"scopes": ["https://www.googleapis.com/auth/moderator"], "id": "moderator.profiles.get", "httpMethod": "GET", "path": "profiles/@me", "response": {"$ref": "Profile"}}, "update": {"scopes": ["https://www.googleapis.com/auth/moderator"], "request": {"$ref": "Profile"}, "response": {"$ref": "Profile"}, "httpMethod": "PUT", "path": "profiles/@me", "id": "moderator.profiles.update"}, "patch": {"scopes": ["https://www.googleapis.com/auth/moderator"], "request": {"$ref": "Profile"}, "response": {"$ref": "Profile"}, "httpMethod": "PATCH", "path": "profiles/@me", "id": "moderator.profiles.patch"}}}', true));
-    $this->featured = new FeaturedServiceResource($this, $this->serviceName, 'featured', json_decode('{"resources": {"series": {"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "id": "moderator.featured.series.list", "httpMethod": "GET", "path": "series/featured", "response": {"$ref": "SeriesList"}}}}}}', true));
-    $this->myrecent = new MyrecentServiceResource($this, $this->serviceName, 'myrecent', json_decode('{"resources": {"series": {"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "id": "moderator.myrecent.series.list", "httpMethod": "GET", "path": "series/@me/recent", "response": {"$ref": "SeriesList"}}}}}}', true));
-    $this->my = new MyServiceResource($this, $this->serviceName, 'my', json_decode('{"resources": {"series": {"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "id": "moderator.my.series.list", "httpMethod": "GET", "path": "series/@me/mine", "response": {"$ref": "SeriesList"}}}}}}', true));
+    $this->featured = new FeaturedServiceResource($this, $this->serviceName, 'featured', json_decode('{}', true));
+    $this->featured_series = new FeaturedSeriesServiceResource($this, $this->serviceName, 'series', json_decode('{"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "id": "moderator.featured.series.list", "httpMethod": "GET", "path": "series/featured", "response": {"$ref": "SeriesList"}}}}', true));
+    $this->myrecent = new MyrecentServiceResource($this, $this->serviceName, 'myrecent', json_decode('{}', true));
+    $this->myrecent_series = new MyrecentSeriesServiceResource($this, $this->serviceName, 'series', json_decode('{"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "id": "moderator.myrecent.series.list", "httpMethod": "GET", "path": "series/@me/recent", "response": {"$ref": "SeriesList"}}}}', true));
+    $this->my = new MyServiceResource($this, $this->serviceName, 'my', json_decode('{}', true));
+    $this->my_series = new MySeriesServiceResource($this, $this->serviceName, 'series', json_decode('{"methods": {"list": {"scopes": ["https://www.googleapis.com/auth/moderator"], "id": "moderator.my.series.list", "httpMethod": "GET", "path": "series/@me/mine", "response": {"$ref": "SeriesList"}}}}', true));
     $this->submissions = new SubmissionsServiceResource($this, $this->serviceName, 'submissions', json_decode('{"methods": {"insert": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "topicId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "unauthToken": {"type": "string", "location": "query"}, "anonymous": {"type": "boolean", "location": "query"}}, "request": {"$ref": "Submission"}, "id": "moderator.submissions.insert", "httpMethod": "POST", "path": "series/{seriesId}/topics/{topicId}/submissions", "response": {"$ref": "Submission"}}, "get": {"scopes": ["https://www.googleapis.com/auth/moderator"], "parameters": {"lang": {"type": "string", "location": "query"}, "seriesId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}, "includeVotes": {"type": "boolean", "location": "query"}, "submissionId": {"format": "uint32", "required": true, "type": "integer", "location": "path"}}, "id": "moderator.submissions.get", "httpMethod": "GET", "path": "series/{seriesId}/submissions/{submissionId}", "response": {"$ref": "Submission"}}}}', true));
   }
 }
 
 class ModeratorTopicsResourcePartial extends apiModel {
   protected $__idType = 'ModeratorTopicsResourcePartialId';
+  protected $__idDataType = '';
   public $id;
   public function setId(ModeratorTopicsResourcePartialId $id) {
     $this->id = $id;
@@ -949,8 +979,10 @@ class ModeratorVotesResourcePartial extends apiModel {
 class Profile extends apiModel {
   public $kind;
   protected $__attributionType = 'ProfileAttribution';
+  protected $__attributionDataType = '';
   public $attribution;
   protected $__idType = 'ProfileId';
+  protected $__idDataType = '';
   public $id;
   public function setKind($kind) {
     $this->kind = $kind;
@@ -974,6 +1006,7 @@ class Profile extends apiModel {
 
 class ProfileAttribution extends apiModel {
   protected $__geoType = 'ProfileAttributionGeo';
+  protected $__geoDataType = '';
   public $geo;
   public $displayName;
   public $location;
@@ -1042,6 +1075,7 @@ class Series extends apiModel {
   public $kind;
   public $description;
   protected $__rulesType = 'SeriesRules';
+  protected $__rulesDataType = '';
   public $rules;
   public $unauthVotingAllowed;
   public $videoSubmissionAllowed;
@@ -1050,8 +1084,10 @@ class Series extends apiModel {
   public $anonymousSubmissionAllowed;
   public $unauthSubmissionAllowed;
   protected $__idType = 'SeriesId';
+  protected $__idDataType = '';
   public $id;
   protected $__countersType = 'SeriesCounters';
+  protected $__countersDataType = '';
   public $counters;
   public function setKind($kind) {
     $this->kind = $kind;
@@ -1185,10 +1221,11 @@ class SeriesId extends apiModel {
 
 class SeriesList extends apiModel {
   protected $__itemsType = 'Series';
+  protected $__itemsDataType = 'array';
   public $items;
   public $kind;
   public function setItems(/* array(Series) */ $items) {
-    $this->assertIsArray($items, Series, __METHOD__);
+    $this->assertIsArray($items, 'Series', __METHOD__);
     $this->items = $items;
   }
   public function getItems() {
@@ -1204,8 +1241,10 @@ class SeriesList extends apiModel {
 
 class SeriesRules extends apiModel {
   protected $__votesType = 'SeriesRulesVotes';
+  protected $__votesDataType = '';
   public $votes;
   protected $__submissionsType = 'SeriesRulesSubmissions';
+  protected $__submissionsDataType = '';
   public $submissions;
   public function setVotes(SeriesRulesVotes $votes) {
     $this->votes = $votes;
@@ -1258,24 +1297,32 @@ class SeriesRulesVotes extends apiModel {
 class Submission extends apiModel {
   public $kind;
   protected $__attributionType = 'SubmissionAttribution';
+  protected $__attributionDataType = '';
   public $attribution;
   public $created;
   public $text;
   protected $__topicsType = 'ModeratorTopicsResourcePartial';
+  protected $__topicsDataType = 'array';
   public $topics;
   public $author;
   protected $__translationsType = 'SubmissionTranslations';
+  protected $__translationsDataType = 'array';
   public $translations;
   protected $__parentSubmissionIdType = 'SubmissionParentSubmissionId';
+  protected $__parentSubmissionIdDataType = '';
   public $parentSubmissionId;
   protected $__voteType = 'ModeratorVotesResourcePartial';
+  protected $__voteDataType = '';
   public $vote;
   public $attachmentUrl;
   protected $__geoType = 'SubmissionGeo';
+  protected $__geoDataType = '';
   public $geo;
   protected $__idType = 'SubmissionId';
+  protected $__idDataType = '';
   public $id;
   protected $__countersType = 'SubmissionCounters';
+  protected $__countersDataType = '';
   public $counters;
   public function setKind($kind) {
     $this->kind = $kind;
@@ -1302,7 +1349,7 @@ class Submission extends apiModel {
     return $this->text;
   }
   public function setTopics(/* array(ModeratorTopicsResourcePartial) */ $topics) {
-    $this->assertIsArray($topics, ModeratorTopicsResourcePartial, __METHOD__);
+    $this->assertIsArray($topics, 'ModeratorTopicsResourcePartial', __METHOD__);
     $this->topics = $topics;
   }
   public function getTopics() {
@@ -1315,7 +1362,7 @@ class Submission extends apiModel {
     return $this->author;
   }
   public function setTranslations(/* array(SubmissionTranslations) */ $translations) {
-    $this->assertIsArray($translations, SubmissionTranslations, __METHOD__);
+    $this->assertIsArray($translations, 'SubmissionTranslations', __METHOD__);
     $this->translations = $translations;
   }
   public function getTranslations() {
@@ -1450,10 +1497,11 @@ class SubmissionId extends apiModel {
 
 class SubmissionList extends apiModel {
   protected $__itemsType = 'Submission';
+  protected $__itemsDataType = 'array';
   public $items;
   public $kind;
   public function setItems(/* array(Submission) */ $items) {
-    $this->assertIsArray($items, Submission, __METHOD__);
+    $this->assertIsArray($items, 'Submission', __METHOD__);
     $this->items = $items;
   }
   public function getItems() {
@@ -1505,6 +1553,7 @@ class Tag extends apiModel {
   public $text;
   public $kind;
   protected $__idType = 'TagId';
+  protected $__idDataType = '';
   public $id;
   public function setText($text) {
     $this->text = $text;
@@ -1552,10 +1601,11 @@ class TagId extends apiModel {
 
 class TagList extends apiModel {
   protected $__itemsType = 'Tag';
+  protected $__itemsDataType = 'array';
   public $items;
   public $kind;
   public function setItems(/* array(Tag) */ $items) {
-    $this->assertIsArray($items, Tag, __METHOD__);
+    $this->assertIsArray($items, 'Tag', __METHOD__);
     $this->items = $items;
   }
   public function getItems() {
@@ -1573,13 +1623,17 @@ class Topic extends apiModel {
   public $kind;
   public $description;
   protected $__rulesType = 'TopicRules';
+  protected $__rulesDataType = '';
   public $rules;
   protected $__featuredSubmissionType = 'Submission';
+  protected $__featuredSubmissionDataType = '';
   public $featuredSubmission;
   public $presenter;
   protected $__countersType = 'TopicCounters';
+  protected $__countersDataType = '';
   public $counters;
   protected $__idType = 'TopicId';
+  protected $__idDataType = '';
   public $id;
   public $name;
   public function setKind($kind) {
@@ -1696,10 +1750,11 @@ class TopicId extends apiModel {
 
 class TopicList extends apiModel {
   protected $__itemsType = 'Topic';
+  protected $__itemsDataType = 'array';
   public $items;
   public $kind;
   public function setItems(/* array(Topic) */ $items) {
-    $this->assertIsArray($items, Topic, __METHOD__);
+    $this->assertIsArray($items, 'Topic', __METHOD__);
     $this->items = $items;
   }
   public function getItems() {
@@ -1715,8 +1770,10 @@ class TopicList extends apiModel {
 
 class TopicRules extends apiModel {
   protected $__votesType = 'TopicRulesVotes';
+  protected $__votesDataType = '';
   public $votes;
   protected $__submissionsType = 'TopicRulesSubmissions';
+  protected $__submissionsDataType = '';
   public $submissions;
   public function setVotes(TopicRulesVotes $votes) {
     $this->votes = $votes;
@@ -1770,6 +1827,7 @@ class Vote extends apiModel {
   public $vote;
   public $flag;
   protected $__idType = 'VoteId';
+  protected $__idDataType = '';
   public $id;
   public $kind;
   public function setVote($vote) {
@@ -1817,10 +1875,11 @@ class VoteId extends apiModel {
 
 class VoteList extends apiModel {
   protected $__itemsType = 'Vote';
+  protected $__itemsDataType = 'array';
   public $items;
   public $kind;
   public function setItems(/* array(Vote) */ $items) {
-    $this->assertIsArray($items, Vote, __METHOD__);
+    $this->assertIsArray($items, 'Vote', __METHOD__);
     $this->items = $items;
   }
   public function getItems() {

@@ -60,6 +60,14 @@ EOGaq;
 		}
 		return $body;
 	}
+	
+	function inject_author_links ($body) {
+		global $post;
+		$profile = get_user_meta($post->post_author, 'wdgpo_gplus', true);
+		if (!$profile) return $body;
+		
+		return $body . ' ' . $this->codec->get_code('author');
+	}
 
 	function inject_gplus_page_id () {
 		$page_id = $this->data->get_option('gplus_page_id');
@@ -73,8 +81,10 @@ EOGaq;
 
 		// Automatic +1 buttons
 		if ('manual' != $this->data->get_option('position')) {
-			//add_filter('the_content', array($this, 'inject_plusone_buttons'), 1); // Do this VERY early in content processing
 			add_filter('the_content', array($this, 'inject_plusone_buttons'), 10);
+		}
+		if ($this->data->get_option('gplus_profile_fields') && $this->data->get_option('gplus_autorship_links')) {
+			add_filter('the_content', array($this, 'inject_author_links'), 10);
 		}
 
 		// Google+ Page

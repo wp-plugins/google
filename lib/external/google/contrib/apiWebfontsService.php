@@ -80,7 +80,6 @@ class apiWebfontsService extends apiService {
     $this->restBasePath = '/webfonts/v1/';
     $this->version = 'v1';
     $this->serviceName = 'webfonts';
-    $this->io = $apiClient->getIo();
 
     $apiClient->addService($this->serviceName, $this->version);
     $this->webfonts = new WebfontsServiceResource($this, $this->serviceName, 'webfonts', json_decode('{"methods": {"list": {"parameters": {"sort": {"enum": ["alpha", "date", "popularity", "style", "trending"], "type": "string", "location": "query"}}, "id": "webfonts.webfonts.list", "httpMethod": "GET", "path": "webfonts", "response": {"$ref": "WebfontList"}}}}', true));
@@ -120,10 +119,11 @@ class Webfont extends apiModel {
 
 class WebfontList extends apiModel {
   protected $__itemsType = 'Webfont';
+  protected $__itemsDataType = 'array';
   public $items;
   public $kind;
   public function setItems(/* array(Webfont) */ $items) {
-    $this->assertIsArray($items, Webfont, __METHOD__);
+    $this->assertIsArray($items, 'Webfont', __METHOD__);
     $this->items = $items;
   }
   public function getItems() {

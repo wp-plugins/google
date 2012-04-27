@@ -83,24 +83,26 @@ class apiPagespeedonlineService extends apiService {
     $this->restBasePath = '/pagespeedonline/v1/';
     $this->version = 'v1';
     $this->serviceName = 'pagespeedonline';
-    $this->io = $apiClient->getIo();
 
     $apiClient->addService($this->serviceName, $this->version);
-    $this->pagespeedapi = new PagespeedapiServiceResource($this, $this->serviceName, 'pagespeedapi', json_decode('{"methods": {"runpagespeed": {"parameters": {"locale": {"pattern": "[a-zA-Z]+(_[a-zA-Z]+)?", "type": "string", "location": "query"}, "url": {"pattern": "http(s)?://.*", "required": true, "type": "string", "location": "query"}, "rule": {"pattern": "[a-zA-Z]+", "repeated": true, "type": "string", "location": "query"}, "strategy": {"enum": ["desktop", "mobile"], "type": "string", "location": "query"}}, "id": "pagespeedonline.pagespeedapi.runpagespeed", "httpMethod": "GET", "path": "runPagespeed", "response": {"$ref": "Result"}}}}', true));
+    $this->pagespeedapi = new PagespeedapiServiceResource($this, $this->serviceName, 'pagespeedapi', json_decode('{"methods": {"runpagespeed": {"parameters": {"locale": {"type": "string", "location": "query"}, "url": {"required": true, "type": "string", "location": "query"}, "rule": {"repeated": true, "type": "string", "location": "query"}, "strategy": {"enum": ["desktop", "mobile"], "type": "string", "location": "query"}}, "id": "pagespeedonline.pagespeedapi.runpagespeed", "httpMethod": "GET", "path": "runPagespeed", "response": {"$ref": "Result"}}}}', true));
   }
 }
 
 class Result extends apiModel {
   public $kind;
   protected $__formattedResultsType = 'ResultFormattedResults';
+  protected $__formattedResultsDataType = '';
   public $formattedResults;
   public $title;
   protected $__versionType = 'ResultVersion';
+  protected $__versionDataType = '';
   public $version;
   public $score;
   public $responseCode;
   public $invalidRules;
   protected $__pageStatsType = 'ResultPageStats';
+  protected $__pageStatsDataType = '';
   public $pageStats;
   public $id;
   public function setKind($kind) {
@@ -140,7 +142,7 @@ class Result extends apiModel {
     return $this->responseCode;
   }
   public function setInvalidRules(/* array(string) */ $invalidRules) {
-    $this->assertIsArray($invalidRules, string, __METHOD__);
+    $this->assertIsArray($invalidRules, 'string', __METHOD__);
     $this->invalidRules = $invalidRules;
   }
   public function getInvalidRules() {
@@ -163,6 +165,7 @@ class Result extends apiModel {
 class ResultFormattedResults extends apiModel {
   public $locale;
   protected $__ruleResultsType = 'ResultFormattedResultsRuleResults';
+  protected $__ruleResultsDataType = 'map';
   public $ruleResults;
   public function setLocale($locale) {
     $this->locale = $locale;
@@ -181,6 +184,7 @@ class ResultFormattedResults extends apiModel {
 class ResultFormattedResultsRuleResults extends apiModel {
   public $localizedRuleName;
   protected $__urlBlocksType = 'ResultFormattedResultsRuleResultsUrlBlocks';
+  protected $__urlBlocksDataType = 'array';
   public $urlBlocks;
   public $ruleScore;
   public $ruleImpact;
@@ -191,7 +195,7 @@ class ResultFormattedResultsRuleResults extends apiModel {
     return $this->localizedRuleName;
   }
   public function setUrlBlocks(/* array(ResultFormattedResultsRuleResultsUrlBlocks) */ $urlBlocks) {
-    $this->assertIsArray($urlBlocks, ResultFormattedResultsRuleResultsUrlBlocks, __METHOD__);
+    $this->assertIsArray($urlBlocks, 'ResultFormattedResultsRuleResultsUrlBlocks', __METHOD__);
     $this->urlBlocks = $urlBlocks;
   }
   public function getUrlBlocks() {
@@ -213,8 +217,10 @@ class ResultFormattedResultsRuleResults extends apiModel {
 
 class ResultFormattedResultsRuleResultsUrlBlocks extends apiModel {
   protected $__headerType = 'ResultFormattedResultsRuleResultsUrlBlocksHeader';
+  protected $__headerDataType = '';
   public $header;
   protected $__urlsType = 'ResultFormattedResultsRuleResultsUrlBlocksUrls';
+  protected $__urlsDataType = 'array';
   public $urls;
   public function setHeader(ResultFormattedResultsRuleResultsUrlBlocksHeader $header) {
     $this->header = $header;
@@ -223,7 +229,7 @@ class ResultFormattedResultsRuleResultsUrlBlocks extends apiModel {
     return $this->header;
   }
   public function setUrls(/* array(ResultFormattedResultsRuleResultsUrlBlocksUrls) */ $urls) {
-    $this->assertIsArray($urls, ResultFormattedResultsRuleResultsUrlBlocksUrls, __METHOD__);
+    $this->assertIsArray($urls, 'ResultFormattedResultsRuleResultsUrlBlocksUrls', __METHOD__);
     $this->urls = $urls;
   }
   public function getUrls() {
@@ -233,10 +239,11 @@ class ResultFormattedResultsRuleResultsUrlBlocks extends apiModel {
 
 class ResultFormattedResultsRuleResultsUrlBlocksHeader extends apiModel {
   protected $__argsType = 'ResultFormattedResultsRuleResultsUrlBlocksHeaderArgs';
+  protected $__argsDataType = 'array';
   public $args;
   public $format;
   public function setArgs(/* array(ResultFormattedResultsRuleResultsUrlBlocksHeaderArgs) */ $args) {
-    $this->assertIsArray($args, ResultFormattedResultsRuleResultsUrlBlocksHeaderArgs, __METHOD__);
+    $this->assertIsArray($args, 'ResultFormattedResultsRuleResultsUrlBlocksHeaderArgs', __METHOD__);
     $this->args = $args;
   }
   public function getArgs() {
@@ -269,11 +276,13 @@ class ResultFormattedResultsRuleResultsUrlBlocksHeaderArgs extends apiModel {
 
 class ResultFormattedResultsRuleResultsUrlBlocksUrls extends apiModel {
   protected $__detailsType = 'ResultFormattedResultsRuleResultsUrlBlocksUrlsDetails';
+  protected $__detailsDataType = 'array';
   public $details;
   protected $__resultType = 'ResultFormattedResultsRuleResultsUrlBlocksUrlsResult';
+  protected $__resultDataType = '';
   public $result;
   public function setDetails(/* array(ResultFormattedResultsRuleResultsUrlBlocksUrlsDetails) */ $details) {
-    $this->assertIsArray($details, ResultFormattedResultsRuleResultsUrlBlocksUrlsDetails, __METHOD__);
+    $this->assertIsArray($details, 'ResultFormattedResultsRuleResultsUrlBlocksUrlsDetails', __METHOD__);
     $this->details = $details;
   }
   public function getDetails() {
@@ -289,10 +298,11 @@ class ResultFormattedResultsRuleResultsUrlBlocksUrls extends apiModel {
 
 class ResultFormattedResultsRuleResultsUrlBlocksUrlsDetails extends apiModel {
   protected $__argsType = 'ResultFormattedResultsRuleResultsUrlBlocksUrlsDetailsArgs';
+  protected $__argsDataType = 'array';
   public $args;
   public $format;
   public function setArgs(/* array(ResultFormattedResultsRuleResultsUrlBlocksUrlsDetailsArgs) */ $args) {
-    $this->assertIsArray($args, ResultFormattedResultsRuleResultsUrlBlocksUrlsDetailsArgs, __METHOD__);
+    $this->assertIsArray($args, 'ResultFormattedResultsRuleResultsUrlBlocksUrlsDetailsArgs', __METHOD__);
     $this->args = $args;
   }
   public function getArgs() {
@@ -325,10 +335,11 @@ class ResultFormattedResultsRuleResultsUrlBlocksUrlsDetailsArgs extends apiModel
 
 class ResultFormattedResultsRuleResultsUrlBlocksUrlsResult extends apiModel {
   protected $__argsType = 'ResultFormattedResultsRuleResultsUrlBlocksUrlsResultArgs';
+  protected $__argsDataType = 'array';
   public $args;
   public $format;
   public function setArgs(/* array(ResultFormattedResultsRuleResultsUrlBlocksUrlsResultArgs) */ $args) {
-    $this->assertIsArray($args, ResultFormattedResultsRuleResultsUrlBlocksUrlsResultArgs, __METHOD__);
+    $this->assertIsArray($args, 'ResultFormattedResultsRuleResultsUrlBlocksUrlsResultArgs', __METHOD__);
     $this->args = $args;
   }
   public function getArgs() {

@@ -6,6 +6,7 @@ class Wdgpo_Codec {
 
 	var $shortcodes = array(
 		'plusone' => 'wdgpo_plusone',
+		'author' => 'wdgpo_author',
 		'gplus_page' => 'wdgpo_gplus_page',
 		'gplus_activities' => 'wdgpo_activities',
 	);
@@ -88,6 +89,25 @@ class Wdgpo_Codec {
 		}
 	}
 
+	function process_author_code ($args) {
+		global $post;
+		$args = shortcode_atts(array(
+			'user_id' => $post->post_author,
+		), $args);
+		$user_id = $args['user_id'];
+		$profile = get_user_meta($user_id, 'wdgpo_gplus', true);
+		if (!$profile) return false;
+		
+		$user = get_userdata($user_id);
+		$profile = preg_match('/\?rel=author/i', $profile) ? esc_url($profile) : esc_url("{$profile}?rel=author");
+		return '<div class="wdgpo_author">' .
+			"<a href='{$profile}'>" .
+				'<img src="https://ssl.gstatic.com/images/icons/gplus-16.png" /> ' .
+				sprintf(__('%s on Google+', 'wdgpo'), $user->display_name) .
+			'</a>' .
+		'</div>';
+	}
+	
 	function process_plusone_code ($args) {
 		$post_id = get_the_ID();
 		if (!$this->_check_display_restrictions($post_id)) return '';
@@ -139,7 +159,7 @@ class Wdgpo_Codec {
 		return $ret;
 	}
 
-	function get_code ($key) {
+	function get_code ($key, $attr=false) {
 		return '[' . $this->shortcodes[$key] . ']';
 	}
 

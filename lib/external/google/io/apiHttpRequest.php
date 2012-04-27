@@ -24,7 +24,7 @@
  *
  */
 class apiHttpRequest {
-  const USER_AGENT_SUFFIX = "google-api-php-client/0.4.6";
+  const USER_AGENT_SUFFIX = "google-api-php-client/0.4.8";
 
   protected $url;
   protected $method;
@@ -85,7 +85,7 @@ class apiHttpRequest {
    * @return string HTTP Response Code.
    */
   public function getResponseHttpCode() {
-    return $this->responseHttpCode;
+    return (int) $this->responseHttpCode;
   }
 
   /**

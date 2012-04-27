@@ -91,7 +91,6 @@ class apiCustomsearchService extends apiService {
     $this->restBasePath = '/customsearch/';
     $this->version = 'v1';
     $this->serviceName = 'customsearch';
-    $this->io = $apiClient->getIo();
 
     $apiClient->addService($this->serviceName, $this->version);
     $this->cse = new CseServiceResource($this, $this->serviceName, 'cse', json_decode('{"methods": {"list": {"parameters": {"sort": {"type": "string", "location": "query"}, "filter": {"enum": ["0", "1"], "type": "string", "location": "query"}, "cx": {"type": "string", "location": "query"}, "googlehost": {"type": "string", "location": "query"}, "safe": {"default": "off", "enum": ["high", "medium", "off"], "location": "query", "type": "string"}, "q": {"required": true, "type": "string", "location": "query"}, "start": {"type": "string", "location": "query"}, "num": {"default": "10", "type": "string", "location": "query"}, "lr": {"enum": ["lang_ar", "lang_bg", "lang_ca", "lang_cs", "lang_da", "lang_de", "lang_el", "lang_en", "lang_es", "lang_et", "lang_fi", "lang_fr", "lang_hr", "lang_hu", "lang_id", "lang_is", "lang_it", "lang_iw", "lang_ja", "lang_ko", "lang_lt", "lang_lv", "lang_nl", "lang_no", "lang_pl", "lang_pt", "lang_ro", "lang_ru", "lang_sk", "lang_sl", "lang_sr", "lang_sv", "lang_tr", "lang_zh-CN", "lang_zh-TW"], "type": "string", "location": "query"}, "cr": {"type": "string", "location": "query"}, "gl": {"type": "string", "location": "query"}, "cref": {"type": "string", "location": "query"}}, "id": "search.cse.list", "httpMethod": "GET", "path": "v1", "response": {"$ref": "Search"}}}}', true));
@@ -100,10 +99,11 @@ class apiCustomsearchService extends apiService {
 
 class Context extends apiModel {
   protected $__facetsType = 'ContextFacets';
+  protected $__facetsDataType = 'array';
   public $facets;
   public $title;
   public function setFacets(/* array(ContextFacets) */ $facets) {
-    $this->assertIsArray($facets, ContextFacets, __METHOD__);
+    $this->assertIsArray($facets, 'ContextFacets', __METHOD__);
     $this->facets = $facets;
   }
   public function getFacets() {
@@ -138,8 +138,10 @@ class Promotion extends apiModel {
   public $link;
   public $displayLink;
   protected $__imageType = 'PromotionImage';
+  protected $__imageDataType = '';
   public $image;
   protected $__bodyLinesType = 'PromotionBodyLines';
+  protected $__bodyLinesDataType = 'array';
   public $bodyLines;
   public $title;
   public function setLink($link) {
@@ -161,7 +163,7 @@ class Promotion extends apiModel {
     return $this->image;
   }
   public function setBodyLines(/* array(PromotionBodyLines) */ $bodyLines) {
-    $this->assertIsArray($bodyLines, PromotionBodyLines, __METHOD__);
+    $this->assertIsArray($bodyLines, 'PromotionBodyLines', __METHOD__);
     $this->bodyLines = $bodyLines;
   }
   public function getBodyLines() {
@@ -413,18 +415,23 @@ class Result extends apiModel {
 
 class Search extends apiModel {
   protected $__promotionsType = 'Promotion';
+  protected $__promotionsDataType = 'array';
   public $promotions;
   public $kind;
   protected $__urlType = 'SearchUrl';
+  protected $__urlDataType = '';
   public $url;
   protected $__itemsType = 'Result';
+  protected $__itemsDataType = 'array';
   public $items;
   protected $__contextType = 'Context';
+  protected $__contextDataType = '';
   public $context;
   protected $__queriesType = 'Query';
+  protected $__queriesDataType = 'map';
   public $queries;
   public function setPromotions(/* array(Promotion) */ $promotions) {
-    $this->assertIsArray($promotions, Promotion, __METHOD__);
+    $this->assertIsArray($promotions, 'Promotion', __METHOD__);
     $this->promotions = $promotions;
   }
   public function getPromotions() {
@@ -443,7 +450,7 @@ class Search extends apiModel {
     return $this->url;
   }
   public function setItems(/* array(Result) */ $items) {
-    $this->assertIsArray($items, Result, __METHOD__);
+    $this->assertIsArray($items, 'Result', __METHOD__);
     $this->items = $items;
   }
   public function getItems() {
