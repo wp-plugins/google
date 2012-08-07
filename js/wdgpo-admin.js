@@ -108,6 +108,23 @@ $("#wdgpo-gplus_import_now").click(function () {
 	});
 });
 
+/* ----- Log toggling ----- */
+$("#wdgpo-toggle_log").on("click", function () {
+	if ($("#wdgpo-log_container").is(":visible")) $("#wdgpo-log_container").hide();
+	else $("#wdgpo-log_container").show();
+	var off = $("#wdgpo-toggle_log").text();
+	$("#wdgpo-toggle_log").text($("#wdgpo-toggle_log").attr("data-off_label"));
+	$("#wdgpo-toggle_log").attr("data-off_label", off);
+	return false;
+});
+
+$("#wdgpo-clear_log").on("click", function () {
+	$(this).text('Working...');
+	$.post(ajaxurl, {"action": "wdgpo_gplus_clear_log"}, function () {
+		window.location.reload();
+	});
+});
+
 
 });
 })(jQuery);

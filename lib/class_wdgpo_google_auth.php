@@ -25,6 +25,8 @@ class Wdgpo_GoogleAuth {
 	private $_client;
 	private $_plus;
 
+	private $_logger = false;
+
 	private function __clone () {}
 
 	private function __construct () {
@@ -38,6 +40,11 @@ class Wdgpo_GoogleAuth {
 		$this->_client_secret = $this->_data->get_option('gplus_client_secret');
 		$this->_token = $this->_data->get_token('gplus_token');
 
+		$log_level = $this->_data->get_option('log');
+		if ($log_level) {
+			$this->_logger = new Wdgpo_Logger($log_level);
+		}
+
 		$this->_load_dependencies();
 		$this->_construct_client();
 	}
@@ -46,7 +53,16 @@ class Wdgpo_GoogleAuth {
 		try {
 			$me = self::get_instance();
 			$me->authenticate();
-		} catch (Exception $e) {}
+			if ($me->_logger) $me->_logger->log(
+				"Initialized and authenticated without exceptions",
+				Wdgpo_Logger::LEVEL_DEBUG
+			);
+		} catch (Exception $e) {
+			if ($me->_logger) $me->_logger->log(
+				sprintf("Error initializing: %s", $e->getMessage()),
+				Wdgpo_Logger::LEVEL_ERROR
+			);
+		}
 	}
 
 	public static function get_instance () {
@@ -59,22 +75,43 @@ class Wdgpo_GoogleAuth {
 	}
 
 	public function get_auth_url () {
-		return $this->_client->getAccessToken() ? false : $this->_client->createAuthUrl();
+		$url = $this->_client->getAccessToken() ? false : $this->_client->createAuthUrl();
+		if ($this->_logger) $this->_logger->log(
+			sprintf("Getting auth url: [%s]", $url ? $url : 'OK'),
+			Wdgpo_Logger::LEVEL_DEBUG
+		);
+		return $url;
 	}
 
 	public function authenticate () {
 		if (isset($_GET['code'])) {
+			if ($this->_logger) $this->_logger->log(
+				"Authenticating",
+				Wdgpo_Logger::LEVEL_DEBUG
+			);
 			$this->_client->authenticate();
+			if ($this->_logger) $this->_logger->log(
+				"Storing auth token",
+				Wdgpo_Logger::LEVEL_DEBUG
+			);
 			$this->_store_auth_token();
 		}
 	}
 
 	public function reset_token () {
+		if ($this->_logger) $this->_logger->log(
+			"Resetting token",
+			Wdgpo_Logger::LEVEL_DEBUG
+		);
 		$this->_token = null;
 		$this->_data->set_token(null);
 	}
 
 	public function get_gplus_data ($test=false) {
+		if ($this->_logger) $this->_logger->log(
+			"Getting data",
+			Wdgpo_Logger::LEVEL_INFO
+		);
 		$import_ids = $this->_data->get_option('gplus_import_ids');
 		$import_ids = $import_ids ? array_filter($import_ids) : array();
 		$import_ids[] = $this->_page_id;
@@ -90,6 +127,10 @@ class Wdgpo_GoogleAuth {
 	}
 
 	public function get_gplus_feed ($gplus_id, $test=false) {
+		if ($this->_logger) $this->_logger->log(
+			"Getting individual feed: {$gplus_id}",
+			Wdgpo_Logger::LEVEL_INFO
+		);
 		$limit = $test ? 1 : ($this->_limit ? $this->_limit : self::GPLUS_MAX_RESULTS);
 		return $this->_plus->activities->list(array(
 			'userId' => $gplus_id,
@@ -102,6 +143,10 @@ class Wdgpo_GoogleAuth {
 	 * Imports latest posts from registered G+ feeds into WP.
 	 */
 	public function import_gplus_data () {
+		if ($this->_logger) $this->_logger->log(
+			"Importing data",
+			Wdgpo_Logger::LEVEL_INFO
+		);
 		$feeds = $this->get_gplus_data();
 		$results = array();
 
@@ -395,6 +440,17 @@ class Wdgpo_GoogleAuth {
 	private function _load_dependencies () {
 		if (!class_exists('apiClient')) require_once(WDGPO_PLUGIN_BASE_DIR . '/lib/external/google/apiClient.php');
 		if (!class_exists('apiPlusService')) require_once(WDGPO_PLUGIN_BASE_DIR . '/lib/external/google/contrib/apiPlusService.php');
+		if (!class_exists('apiClient') || !class_exists('apiPlusService')) {
+			if ($this->_logger) $this->_logger->log(
+				"Missing dependencies",
+				Wdgpo_Logger::LEVEL_ERROR
+			);
+		} else {
+			if ($this->_logger) $this->_logger->log(
+				"Successfully loaded dependencies",
+				Wdgpo_Logger::LEVEL_DEBUG
+			);
+		}
 	}
 
 	private function _construct_client () {

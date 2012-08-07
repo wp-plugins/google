@@ -421,4 +421,31 @@ class Wdgpo_AdminFormRenderer {
 		echo '<div><small>' . __('Your +1 clicks will be added to this category.', 'wdgpo') . '</small></div>';
 	}
 
+	function create_log_level_box () {
+		echo '' .
+			$this->_create_radiobox('log', 0) .
+			'<label for="log-0">' . __('Do not do any logging', 'wdgpo') . '</label>' .
+		'<br />';
+		echo '' .
+			$this->_create_radiobox('log', Wdgpo_Logger::LEVEL_ERROR) .
+			'<label for="log-' . Wdgpo_Logger::LEVEL_ERROR . '">' . __('Log only errors', 'wdgpo') . '</label>' .
+		'<br />';
+		echo '' .
+			$this->_create_radiobox('log', Wdgpo_Logger::LEVEL_INFO) .
+			'<label for="log-' . Wdgpo_Logger::LEVEL_INFO . '">' . __('Log info messages too', 'wdgpo') . '</label>' .
+		'<br />';
+		echo '' .
+			$this->_create_radiobox('log', Wdgpo_Logger::LEVEL_DEBUG) .
+			'<label for="log-' . Wdgpo_Logger::LEVEL_DEBUG . '">' . __('Debugging level', 'wdgpo') . '</label>' .
+		'<br />';
+	}
+
+	function create_log_output_box () {
+		$log = new Wdgpo_Logger;
+		echo '<a href="#log" id="wdgpo-toggle_log" data-off_label="' . esc_attr('Hide log', 'wdgpo') . '">' . __('Show log', 'wdgpo') . '</a>';
+		echo '&nbsp;|&nbsp;';
+		echo '<a href="#clear-log" id="wdgpo-clear_log">' . __('Clear log', 'wdgpo') . '</a>';
+		echo '<div id="wdgpo-log_container" style="display:none">' . $log->get_log_string() . '</div>';
+	}
+
 }

@@ -61,6 +61,10 @@ class Wdgpo_AdminPages {
 		add_settings_section('wdgpo_analytics', __('Google Analytics integration', 'wdgpo'), create_function('', ''), 'wdgpo_options_page');
 		add_settings_field('wdgpo_analytics_enable', __('Enable Google Analytics integration', 'wdgpo'), array($form, 'create_enable_analytics_box'), 'wdgpo_options_page', 'wdgpo_analytics');
 		add_settings_field('wdgpo_analytics_category', __('Analytics category', 'wdgpo'), array($form, 'create_analytics_category_box'), 'wdgpo_options_page', 'wdgpo_analytics');
+		
+		add_settings_section('wdgpo_logging', __('Logging', 'wdgpo'), create_function('', ''), 'wdgpo_options_page');
+		add_settings_field('wdgpo_log_level', __('Log level', 'wdgpo'), array($form, 'create_log_level_box'), 'wdgpo_options_page', 'wdgpo_logging');
+		add_settings_field('wdgpo_log_output', __('Log', 'wdgpo'), array($form, 'create_log_output_box'), 'wdgpo_options_page', 'wdgpo_logging');
 	}
 
 	function create_blog_admin_menu_entry () {
@@ -117,6 +121,12 @@ class Wdgpo_AdminPages {
 		die;
 	}
 
+	function json_gplus_clear_log () {
+		$log = new Wdgpo_Logger;
+		$log->clear();
+		die;
+	}
+
 	function add_hooks () {
 		// Step0: Register options and menu
 		add_action('admin_init', array($this, 'register_settings'));
@@ -139,5 +149,6 @@ class Wdgpo_AdminPages {
 		add_action('wp_ajax_wdgpo_gplus_deauthenticate', array($this, 'json_gplus_deauthenticate'));
 		add_action('wp_ajax_wdgpo_gplus_test_import', array($this, 'json_gplus_test_import'));
 		add_action('wp_ajax_wdgpo_gplus_import_now', array($this, 'json_gplus_import_now'));
+		add_action('wp_ajax_wdgpo_gplus_clear_log', array($this, 'json_gplus_clear_log'));
 	}
 }

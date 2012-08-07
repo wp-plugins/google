@@ -61,7 +61,7 @@ class Wdgpo_ContextualHelp {
 					'title' => __('General Info', 'wdgpo'),
 					'content' => '' .
 						'<p>' . __('The Google+ Plugin is your one-stop solution for total WordPress - Google Plus integration. This is the only plugin you\'ll ever need to take full advantage of Google\'s social media tools.', 'wdgpo') . '</p>' .
-						'<p><b>' . __('Check out the Google+ Plugin’s awesome features:', 'wdgpo') . '</b></p>' .
+						'<p><b>' . __('Check out the Google+ Plugin\'s awesome features:', 'wdgpo') . '</b></p>' .
 						'<ul>' .
 							'<li>' . __('<b>Add a +1 button to your site</b>  and let visitors spread the word about your content.', 'wdgpo') . '</li>' .
 							'<li>' . __('<b>Integrate your WordPress site with Google Pages</b> so people can easily add you to their circles.', 'wdgpo') . '</li>' .
