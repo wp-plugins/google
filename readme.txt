@@ -2,7 +2,7 @@
 Contributors: WPMUDEV, vebailovity, raggedrobins
 Tags: Google+1, Google, plusone, buddypress plugin, wpmu, buddypress, multisite, Google+ pages, Google Analytics, tumblog
 Requires at least: 3.1
-Tested up to: 3.4.1
+Tested up to: 3.6.1
 Stable tag: 1.3.3
 
 The Google + Plugin integrates WordPress with your G+ Profile and Page - now with BuddyPress and Post Format Support!
