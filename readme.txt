@@ -2,7 +2,7 @@
 Contributors: WPMUDEV, vebailovity, raggedrobins
 Tags: Google+1, Google, plusone, buddypress plugin, wpmu, buddypress, multisite, Google+ pages, Google Analytics, tumblog
 Requires at least: 3.1
-Tested up to: 3.6.1
+Tested up to: 3.9.1
 Stable tag: 1.3.3
 
 The Google + Plugin integrates WordPress with your G+ Profile and Page - now with BuddyPress and Post Format Support!
@@ -10,6 +10,8 @@ The Google + Plugin integrates WordPress with your G+ Profile and Page - now wit
 == Description ==
  
 Google+ is Google's foray into the world of social media. Over the past six months we've seen it expand rapidly and the WPMU DEV Google+ Plugin has expanded with it.
+
+[youtube https://www.youtube.com/watch?v=PWA-kgrxr2A]
 
 The WPMU DEV Google+ Plugin lets you add a +1 button to your website so that people can tell the world how awesome they think you are. 
  It integrates with Google+ Posts and Pages so that people can easily add you to their G+ Circles.
