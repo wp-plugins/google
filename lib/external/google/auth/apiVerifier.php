@@ -22,10 +22,12 @@ require_once "apiPemVerifier.php";
  *
  * @author Brian Eaton <beaton@google.com>
  */
+if( !class_exists( 'apiVerifier' ) ) {
 abstract class apiVerifier {
   /**
    * Checks a signature, returns true if the signature is correct,
    * false otherwise.
    */
   abstract public function verify($data, $signature);
+}
 }

@@ -23,6 +23,7 @@
  *
  * @author Chris Chabot <chabotc@google.com>
  */
+if( !class_exists( 'apiApcCache' ) ) {
 class apiApcCache extends apiCache {
 
   public function __construct() {
@@ -94,4 +95,5 @@ class apiApcCache extends apiCache {
   public function delete($key) {
     @apc_delete($key);
   }
+}
 }
