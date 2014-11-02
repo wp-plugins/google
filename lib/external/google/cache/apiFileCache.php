@@ -24,6 +24,7 @@
  *
  * @author Chris Chabot <chabotc@google.com>
  */
+if( !class_exists( 'apiFileCache' ) ) {
 class apiFileCache extends apiCache {
   private $path;
 
@@ -132,4 +133,5 @@ class apiFileCache extends apiCache {
       throw new apiCacheException("Cache file could not be deleted");
     }
   }
+}
 }

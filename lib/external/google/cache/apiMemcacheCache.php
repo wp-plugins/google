@@ -23,6 +23,7 @@
  *
  * @author Chris Chabot <chabotc@google.com>
  */
+if( !class_exists( 'apiMemcacheCache' ) ) {
 class apiMemcacheCache extends apiCache {
   private $connection = false;
 
@@ -123,4 +124,5 @@ class apiMemcacheCache extends apiCache {
     $this->check();
     @memcache_delete($this->connection, $key);
   }
+}
 }
