@@ -24,7 +24,6 @@ require_once "apiMemcacheCache.php";
  *
  * @author Chris Chabot <chabotc@google.com>
  */
-if( !class_exists( 'apiCache' ) ) {
 abstract class apiCache {
 
   /**
@@ -52,7 +51,4 @@ abstract class apiCache {
    * @param String $key
    */
   abstract function delete($key);
-}
-
-
 }

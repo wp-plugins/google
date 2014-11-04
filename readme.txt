@@ -3,7 +3,7 @@ Contributors: WPMUDEV, vebailovity, raggedrobins, rheinardkorf
 Tags: Google+, Google, Social Share, share button, social recommend post on Google+, Share, account, +1, plus one
 Requires at least: 3.1
 Tested up to: 4.0
-Stable tag: 1.3.4
+Stable tag: 1.3.5
 
 The Google + Plugin integrates WordPress with your G+ Profile and Page - now with BuddyPress and Post Format Support!
 
@@ -67,6 +67,9 @@ No.  This plugins is offered as is at no charge.
 6. Imported BuddyPress activities
 
 == Changelog ==
+
+= 1.3.5 = 
+- Fixed issue with Google API auth class creating error with upgrading from 1.3.3.
 
 = 1.3.4 =
 - Fixed conflicts when using multiple plugins using Google API.
