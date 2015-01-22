@@ -1,8 +1,8 @@
 === The Google+ plugin ===
-Contributors: WPMUDEV, vebailovity, raggedrobins, rheinardkorf
+Contributors: WPMUDEV
 Tags: Google+, Google, Social Share, share button, social recommend post on Google+, Share, account, +1, plus one
 Requires at least: 3.1
-Tested up to: 4.0
+Tested up to: 4.1
 Stable tag: 1.3.5
 
 The Google + Plugin integrates WordPress with your G+ Profile and Page - now with BuddyPress and Post Format Support!
